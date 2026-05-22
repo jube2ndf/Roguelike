@@ -17,15 +17,15 @@ namespace Scene {
 
 		}
 
-		SceneRequest getAction() {
+		SceneRequest getAction() const {
 			return this->action;
 		}
-		SceneType getId() {
+		SceneType getId() const {
 			return this->id;
 		}
 
 	private:
-		SceneRequest action;
-		SceneType id;
+		SceneRequest action = SceneRequest::None;
+		SceneType id = SceneType::None;
 	};
 }
