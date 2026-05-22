@@ -13,10 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы заголовков\Settings">
+      <UniqueIdentifier>{69792338-754e-411c-be45-d16ecf907bdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Scene">
+      <UniqueIdentifier>{c023a998-cbb3-4772-aa6f-fc10ce97b7a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Interface">
+      <UniqueIdentifier>{87567b2a-94cb-4a4e-8d4f-e83e91c40467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Scene\SceneCommand">
+      <UniqueIdentifier>{6e3d9fd4-8f2d-4746-9f5e-0f0d0e8b42ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AppSettings.h">
+      <Filter>Файлы заголовков\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="IScene.h">
+      <Filter>Файлы заголовков\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneType.h">
+      <Filter>Файлы заголовков\Scene\SceneCommand</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRequest.h">
+      <Filter>Файлы заголовков\Scene\SceneCommand</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneCommand.h">
+      <Filter>Файлы заголовков\Scene\SceneCommand</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
