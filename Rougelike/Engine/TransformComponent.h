@@ -4,7 +4,7 @@ namespace Engine {
     class TransformComponent :
         public Component
     {
-	public:
+	/*public:
 		TransformComponent(GameObject* gameObject);
 
 		void Update(float deltaTime) override;
@@ -20,6 +20,6 @@ namespace Engine {
 	private:
 		mutable Vector2Df position = { 0, 0 };
 		mutable float rotation = 0.f;
-		mutable Vector2Df scale = { 1, 1 };
+		mutable Vector2Df scale = { 1, 1 };*/
     };
 }
