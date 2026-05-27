@@ -1,25 +1,26 @@
 #pragma once
+#include <SFML/System/Vector2.hpp>
 #include "Component.h"
 namespace Engine {
     class TransformComponent :
         public Component
     {
-	/*public:
-		TransformComponent(GameObject* gameObject);
+	public:
+		TransformComponent(GameObject* gameObject):Component(gameObject){}
 
 		void Update(float deltaTime) override;
 
-		void MoveBy(const Vector2D& offset);
+		void MoveBy(const sf::Vector2f& offset);
 		void RotateBy(float offset);
-		void ScaleBy(const Vector2Df& scaleOffset);
+		void ScaleBy(const sf::Vector2f& scaleOffset);
 
-		const Vector2Df GetWorldPosition() const;
-		const float GetWorldRotation() const;
-		const Vector2Df GetWorldScale() const;
+		sf::Vector2f GetWorldPosition() const;
+		float GetWorldRotation() const;
+		sf::Vector2f GetWorldScale() const;
 
 	private:
-		mutable Vector2Df position = { 0, 0 };
-		mutable float rotation = 0.f;
-		mutable Vector2Df scale = { 1, 1 };*/
+		mutable sf::Vector2f _position = { 0, 0 };
+		mutable float _rotation = 0.f;
+		mutable sf::Vector2f _scale = { 1, 1 };
     };
 }

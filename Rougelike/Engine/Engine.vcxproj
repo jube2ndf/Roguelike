@@ -130,6 +130,8 @@
     </Link>
     <PostBuildEvent>
       <Message>xcopy /y /d "$(TargetPath)" "$(SolutionDir)Roguelike\$(Platform)\$(Configuration)\"</Message>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
