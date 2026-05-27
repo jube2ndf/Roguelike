@@ -3,6 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Engine/Engine.vcxproj" />
-  <Project Path="Rougelike/Rougelike.vcxproj" />
+  <Project Path="Engine/Engine.vcxproj" Id="1d42162d-004e-4d1c-bff5-bbf3d525e2e6" />
+  <Project Path="Rougelike/Rougelike.vcxproj" Id="abfc94ad-601b-435b-976d-6b44c5291ad6" />
 </Solution>
