@@ -6,6 +6,7 @@ namespace Engine {
 	class Component
 	{
 	public:
+		static constexpr bool Unique = false;
 		Component(GameObject* gameObject):_owner(gameObject) {
 
 		}

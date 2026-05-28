@@ -6,6 +6,8 @@ namespace Engine {
         public Component
     {
 	public:
+		static constexpr bool Unique = true;
+
 		TransformComponent(GameObject* gameObject):Component(gameObject){}
 
 		void Update(float deltaTime) override;
