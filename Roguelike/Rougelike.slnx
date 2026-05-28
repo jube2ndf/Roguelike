@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Engine/Engine.vcxproj" Id="1d42162d-004e-4d1c-bff5-bbf3d525e2e6" />
+  <Project Path="EngineTest/EngineTest.vcxproj" Id="2e8ac89a-7ab8-4b2b-a639-e40cb3437778" />
+  <Project Path="Roguelike/Rougelike.vcxproj" Id="abfc94ad-601b-435b-976d-6b44c5291ad6" />
+</Solution>
