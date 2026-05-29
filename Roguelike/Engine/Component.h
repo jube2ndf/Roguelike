@@ -14,6 +14,7 @@ namespace GameEngine {
 				<< this
 				<< std::endl;
 		}
+
 		virtual ~Component() {
 			std::cout << "Deleted component: " << this << std::endl;
 		}
@@ -23,6 +24,7 @@ namespace GameEngine {
 		GameObject* GetGameObject() const {
 			return this->_owner;
 		}
+
 		bool IsActive() const
 		{
 			return this->_active;

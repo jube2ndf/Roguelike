@@ -16,6 +16,12 @@
     <Filter Include="Файлы заголовков\Components">
       <UniqueIdentifier>{c03dcea2-2706-4f13-9620-84768138a580}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Components\RenderComponent">
+      <UniqueIdentifier>{087d15d1-a60b-405b-9167-2f7152875adc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Systems">
+      <UniqueIdentifier>{f76d9f33-ec58-4c6e-958e-836486815804}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -36,6 +42,21 @@
     <ClInclude Include="GameObject.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Файлы заголовков\Components\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeRenderer.h">
+      <Filter>Файлы заголовков\Components\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Файлы заголовков\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -51,6 +72,15 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

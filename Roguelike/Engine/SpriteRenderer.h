@@ -13,8 +13,6 @@ namespace GameEngine {
         {
             
         }
-
-
     protected:
         sf::Sprite _sprite;
 
