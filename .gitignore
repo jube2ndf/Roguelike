@@ -1,4 +1,10 @@
 .vs
+*.dll
+*.exe
+*.obj
+*.pdb
+*.lib
+*.exp
 x64
 x86
 *.user

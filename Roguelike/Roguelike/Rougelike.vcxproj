@@ -118,10 +118,10 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PreBuildEvent>
-      <Message>xcopy /Y /I "$(SolutionDir)Engine\x64\$(Configuration)\Engine.dll" "$(OutDir)"</Message>
+      <Command>xcopy /Y /D /I "$(SolutionDir)SFML-3.1.0\bin\*.dll" "$(OutDir)"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Message>xcopy /Y /I "$(SolutionDir)Engine\x64\$(Configuration)\Engine.dll" "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\"</Message>
+      <Command>xcopy /Y /I "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
