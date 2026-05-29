@@ -2,7 +2,7 @@
 #include "Engine.h"
 #include "Component.h"
 namespace GameEngine {
-    class ENGINE_API TransformComponent :
+    class TransformComponent :
         public Component
     {
 	public:

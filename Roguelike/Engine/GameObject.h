@@ -6,7 +6,7 @@
 #include "Component.h"
 #include "TransformComponent.h"
 namespace GameEngine {
-	class ENGINE_API GameObject
+	class GameObject
 	{
 	public:
 		GameObject() {

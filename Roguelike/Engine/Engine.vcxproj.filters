@@ -75,6 +75,9 @@
     <ClInclude Include="BoxCollider.h">
       <Filter>Файлы заголовков\Components\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Файлы заголовков\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">

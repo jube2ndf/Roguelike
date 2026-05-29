@@ -8,6 +8,7 @@
 #include "PhysicsSystem.h"
 #include "UpdateSystem.h"
 #include "CollisionSystem.h"
+#include "SceneManager.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <windows.h>
@@ -22,24 +23,14 @@ void Engine::Initialize()
 	std::cout << "Engine initialized\n";
 }
 
-void Engine::Run()
+void Engine::Run(GameEngine::SceneManager& scenes)
 {
     sf::RenderWindow window(sf::VideoMode({ 1280, 720 }), "Engine");
 
-    GameEngine::Scene scene;
-    auto obj = scene.CreateObject();
-
-    auto transform = obj->GetComponent<GameEngine::TransformComponent>();
-
-    transform->MoveBy({ 1280/2, 720/2 });
-
-    obj->AddComponent<GameEngine::ShapeRenderer>();
-
-
-    GameEngine::RenderSystem renderSystem;
-    GameEngine::PhysicsSystem physicsSystem;
-    GameEngine::CollisionSystem collisionSystem;
-    GameEngine::UpdateSystem updateSystem;
+    GameEngine::RenderSystem render;
+    GameEngine::PhysicsSystem physics;
+    GameEngine::CollisionSystem collision;
+    GameEngine::UpdateSystem update;
 
     sf::Clock clock;
 
@@ -47,26 +38,23 @@ void Engine::Run()
     {
         float dt = clock.restart().asSeconds();
 
-        while (const std::optional<sf::Event> event = window.pollEvent())
+        while (const std::optional<sf::Event> e = window.pollEvent())
         {
-            if (event->is<sf::Event::Closed>())
-            {
+            if (e->is<sf::Event::Closed>())
                 window.close();
-            }
         }
 
-        // 1. UPDATE (логика компонентов)
-        updateSystem.Update(&scene, dt);
+        GameEngine::Scene* scene = scenes.GetActiveScene();
 
-        // 2. PHYSICS (движение)
-        physicsSystem.Update(&scene, dt);
+        if (!scene)
+            continue;
 
-        // 3. COLLISIONS
-        collisionSystem.Update(&scene);
+        update.Update(scene, dt);
+        physics.Update(scene, dt);
+        collision.Update(scene);
 
-        // 4. RENDER
         window.clear();
-        renderSystem.Render(window, &scene);
+        render.Render(window, scene);
         window.display();
     }
 }

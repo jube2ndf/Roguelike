@@ -1,7 +1,4 @@
-﻿#include <SFML/Graphics.hpp>
-#include <../Engine/Engine.h>
-
-using namespace sf;
+﻿#include <Engine.h>
 
 int main()
 {

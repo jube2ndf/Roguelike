@@ -5,14 +5,19 @@
 #else
 #define ENGINE_API __declspec(dllimport)
 #endif// !ENGINE_EXPORTS
-class ENGINE_API GameObject;
-class ENGINE_API Component;
-class ENGINE_API TransformComponent;
+class Scene;
+
+class CollisionSystem;
+class PhysicsSystem;
+class RenderSystem;
+class UpdateSystem;
+
+
 class ENGINE_API Engine {
 public:
 	Engine();
 	void Initialize();
-	void Run();
+	void Run(GameEngine::SceneManager& scenes);
 };
 #endif // !ENGINE_H
 
