@@ -22,6 +22,9 @@
     <Filter Include="Файлы заголовков\Systems">
       <UniqueIdentifier>{f76d9f33-ec58-4c6e-958e-836486815804}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Components\Physics">
+      <UniqueIdentifier>{524804f6-1c96-43bb-b1ba-19546bda50c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -57,6 +60,21 @@
     <ClInclude Include="RenderSystem.h">
       <Filter>Файлы заголовков\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateSystem.h">
+      <Filter>Файлы заголовков\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>Файлы заголовков\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionSystem.h">
+      <Filter>Файлы заголовков\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Файлы заголовков\Components\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -81,6 +99,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="RenderSystem.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

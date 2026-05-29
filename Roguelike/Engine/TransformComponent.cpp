@@ -9,7 +9,7 @@ namespace GameEngine
 	}
 	void TransformComponent::MoveBy(const sf::Vector2f& offset)
 	{
-		this->_position = offset;
+		this->_position += offset;
 	}
 
 	void TransformComponent::RotateBy(float offset)
