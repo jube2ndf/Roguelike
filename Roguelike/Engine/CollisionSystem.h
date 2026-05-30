@@ -66,7 +66,35 @@ namespace GameEngine {
         }
 
         void ResolveCollision(Collider* a, Collider* b) {
+            auto rbA = a->GetGameObject()->GetComponent<Rigidbody>();
+            auto rbB = b->GetGameObject()->GetComponent<Rigidbody>();
 
+            if (!rbA && !rbB)
+                return;
+            auto ta = a->GetGameObject()->GetComponent<TransformComponent>();
+            auto tb = b->GetGameObject()->GetComponent<TransformComponent>();
+
+            sf::Vector2f delta = ta->GetWorldPosition() - tb->GetWorldPosition();
+
+            float overlapX = 10.f; // позже заменишь на точный расчет
+            float overlapY = 10.f;
+
+            if (std::abs(delta.x) > std::abs(delta.y))
+            {
+                if (rbA && !rbA->isKinematic)
+                    ta->MoveBy({ delta.x > 0 ? overlapX : -overlapX, 0 });
+
+                if (rbB && !rbB->isKinematic)
+                    tb->MoveBy({ delta.x < 0 ? overlapX : -overlapX, 0 });
+            }
+            else
+            {
+                if (rbA && !rbA->isKinematic)
+                    ta->MoveBy({ 0, delta.y > 0 ? overlapY : -overlapY });
+
+                if (rbB && !rbB->isKinematic)
+                    tb->MoveBy({ 0, delta.y < 0 ? overlapY : -overlapY });
+            }
         }
 
         void SendTriggerEvent(Collider* a, Collider* b)

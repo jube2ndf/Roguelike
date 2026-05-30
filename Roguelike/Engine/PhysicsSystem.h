@@ -10,19 +10,26 @@ namespace GameEngine {
         {
             for (auto& obj : scene->GetObjects())
             {
-                auto transform = obj->GetComponent<TransformComponent>();
-                auto rb = obj->GetComponent<Rigidbody>();
+                for (auto& obj : scene->GetObjects())
+                {
+                    auto rb = obj->GetComponent<Rigidbody>();
+                    auto transform = obj->GetComponent<TransformComponent>();
 
-                if (!transform || !rb || rb->isKinematic)
-                    continue;
+                    if (!rb || !transform)
+                        continue;
 
-                transform->MoveBy(rb->velocity * dt);
+                    if (rb->isKinematic)
+                        continue;
 
-                float damp = 1.f - rb->drag * dt;
-                if (damp < 0.f)
-                    damp = 0.f;
+                    // 1. ускорение → скорость
+                    rb->velocity += rb->acceleration * dt;
 
-                rb->velocity *= damp;
+                    // 2. drag (плавное затухание)
+                    rb->velocity *= std::max<float>(0.f, 1.f - rb->drag * dt);
+
+                    // 3. перемещение
+                    transform->MoveBy(rb->velocity * dt);
+                }
             }
         }
     };
