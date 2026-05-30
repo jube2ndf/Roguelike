@@ -3,86 +3,263 @@
 #include "TransformComponent.h"
 #include "Rigidbody.h"
 #include "BoxCollider.h"
+#include "CircleCollider.h"
+#include "CollisionPair.h"
+#include "ITriggerListener.h"
+#include <algorithm>
+#include <unordered_set>
+#include <vector>
 #include <SFML/System/Vector2.hpp>
 
 namespace GameEngine {
     class CollisionSystem
     {
-    private:
-        inline bool CheckAABB(
-            const sf::Vector2f& posA,
-            const sf::Vector2f& sizeA,
-            const sf::Vector2f& posB,
-            const sf::Vector2f& sizeB)
-        {
-            return
-                std::abs(posA.x - posB.x) < (sizeA.x + sizeB.x) * 0.5f &&
-                std::abs(posA.y - posB.y) < (sizeA.y + sizeB.y) * 0.5f;
-        }
-        inline void ResolveCollision(
-            TransformComponent* a,
-            Rigidbody* ra,
-            TransformComponent* b,
-            Rigidbody* rb)
-        {
-            sf::Vector2f delta = a->GetWorldPosition() - b->GetWorldPosition();
-
-            float dx = std::abs(delta.x);
-            float dy = std::abs(delta.y);
-
-            if (dx > dy)
-            {
-                // по X
-                if (delta.x > 0)
-                    a->MoveBy({ 1.f,0 });
-                else
-                    a->MoveBy({ 1.f,0 });
-
-                if (ra)
-                    ra->velocity.x = 0.f;
-            }
-            else
-            {
-                // по Y
-                if (delta.y > 0)
-                    a->MoveBy({ 0, 1.f });
-                else
-                    a->MoveBy({ 0, -1.f });
-
-                if (ra)
-                    ra->velocity.y = 0.f;
-            }
-        }
     public:
         void Update(Scene* scene)
         {
-            auto& objects = scene->GetObjects();
+            std::vector<Collider*> colliders;
 
-            for (size_t i = 0; i < objects.size(); i++)
+            for (auto& obj : scene->GetObjects())
             {
-                for (size_t j = i + 1; j < objects.size(); j++)
+                auto col = obj->GetComponent<Collider>();
+                if (col) colliders.push_back(col);
+            }
+            std::unordered_set<CollisionPair> current;
+
+            for (size_t i = 0; i < colliders.size(); i++)
+            {
+                for (size_t j = i + 1; j < colliders.size(); j++)
                 {
-                    auto a = objects[i].get();
-                    auto b = objects[j].get();
-
-                    auto ta = a->GetComponent<TransformComponent>();
-                    auto tb = b->GetComponent<TransformComponent>();
-
-                    auto ca = a->GetComponent<BoxCollider>();
-                    auto cb = b->GetComponent<BoxCollider>();
-
-                    auto ra = a->GetComponent<Rigidbody>();
-                    auto rb = b->GetComponent<Rigidbody>();
-
-                    if (!ta || !tb || !ca || !cb || !ra || !rb)
-                        continue;
-
-                    if (CheckAABB(ta->GetWorldPosition(), ca->size, tb->GetWorldPosition(), cb->size))
+                    if (CheckCollision(colliders[i], colliders[j]))
                     {
-                        ResolveCollision(ta, ra, tb, rb);
+                        CollisionPair pair{ colliders[i], colliders[j] };
+
+                        current.insert(pair);
+
+                        HandleTrigger(colliders[i], colliders[j]);
                     }
                 }
             }
+
+            // Exit / Enter / Stay логика
+            ProcessEvents(current);
+
+            _previousCollisions = std::move(current);
+
+            scene->DestroyMarked();
+        }
+    private:
+        std::unordered_set<CollisionPair>
+            _previousCollisions;
+
+        void HandleTrigger(Collider* a, Collider* b)
+        {
+            if (a->isTrigger || b->isTrigger)
+            {
+                SendTriggerEvent(a, b);
+            }
+            else
+            {
+                ResolveCollision(a, b);
+            }
+        }
+
+        void ResolveCollision(Collider* a, Collider* b) {
+
+        }
+
+        void SendTriggerEvent(Collider* a, Collider* b)
+        {
+            CallListenersEnter(a, b);
+            CallListenersEnter(b, a);
+        }
+
+        void CallListenersEnter(Collider* self, Collider* other)
+        {
+            auto obj = self->GetGameObject();
+
+            for (auto& comp : obj->GetComponents<Component>())
+            {
+                auto listener =
+                    dynamic_cast<ITriggerListener*>(comp);
+
+                if (listener)
+                    listener->OnTriggerEnter(other);
+            }
+        }
+        void CallListenersStay(Collider* self, Collider* other)
+        {
+            auto obj = self->GetGameObject();
+
+            for (auto& comp : obj->GetComponents<Component>())
+            {
+                auto listener =
+                    dynamic_cast<ITriggerListener*>(comp);
+
+                if (listener)
+                    listener->OnTriggerStay(other);
+            }
+        }
+
+        void CallListenersExit(Collider* self, Collider* other)
+        {
+            auto obj = self->GetGameObject();
+
+            for (auto& comp : obj->GetComponents<Component>())
+            {
+                auto listener =
+                    dynamic_cast<ITriggerListener*>(comp);
+
+                if (listener)
+                    listener->OnTriggerExit(other);
+            }
+        }
+
+        void ProcessEvents(
+            const std::unordered_set<CollisionPair>& current)
+        {
+            for (auto& pair : current)
+            {
+                if (_previousCollisions.find(pair) == _previousCollisions.end())
+                {
+                    CallListenersEnter(pair.a, pair.b);
+                }
+                else
+                {
+                    CallListenersStay(pair.a, pair.b);
+                }
+            }
+
+            for (auto& pair : _previousCollisions)
+            {
+                if (current.find(pair) == current.end())
+                {
+                    CallListenersExit(pair.a, pair.b);
+                }
+            }
+        }
+
+        bool CheckCollision(
+            Collider* a,
+            Collider* b)
+        {
+            if (auto boxA =
+                dynamic_cast<BoxCollider*>(a))
+            {
+                if (auto boxB =
+                    dynamic_cast<BoxCollider*>(b))
+                {
+                    return CheckBoxBox(boxA, boxB);
+                }
+
+                if (auto circleB =
+                    dynamic_cast<CircleCollider*>(b))
+                {
+                    return CheckBoxCircle(
+                        boxA,
+                        circleB);
+                }
+            }
+
+            if (auto circleA =
+                dynamic_cast<CircleCollider*>(a))
+            {
+                if (auto circleB =
+                    dynamic_cast<CircleCollider*>(b))
+                {
+                    return CheckCircleCircle(
+                        circleA,
+                        circleB);
+                }
+
+                if (auto boxB =
+                    dynamic_cast<BoxCollider*>(b))
+                {
+                    return CheckBoxCircle(
+                        boxB,
+                        circleA);
+                }
+            }
+
+            return false;
+        }
+
+        bool CheckBoxBox(
+            BoxCollider* a,
+            BoxCollider* b)
+        {
+            auto posA =
+                a->GetWorldPosition();
+
+            auto posB =
+                b->GetWorldPosition();
+
+            return
+                posA.x < posB.x + b->size.x &&
+                posA.x + a->size.x > posB.x &&
+                posA.y < posB.y + b->size.y &&
+                posA.y + a->size.y > posB.y;
+        }
+
+        bool CheckCircleCircle(
+            CircleCollider* a,
+            CircleCollider* b)
+        {
+            auto posA =
+                a->GetWorldPosition();
+
+            auto posB =
+                b->GetWorldPosition();
+
+            float dx = posA.x - posB.x;
+            float dy = posA.y - posB.y;
+
+            float distanceSquared =
+                dx * dx + dy * dy;
+
+            float radiusSum =
+                a->radius + b->radius;
+
+            return distanceSquared <
+                radiusSum * radiusSum;
+        }
+
+        float Clamp(float value,
+            float minValue,
+            float maxValue)
+        {
+            return std::max<float>(minValue,
+                std::min<float>(value, maxValue));
+        }
+
+        bool CheckBoxCircle(
+            BoxCollider* box,
+            CircleCollider* circle
+        ) {
+            auto boxPos =
+                box->GetWorldPosition();
+
+            auto circlePos =
+                circle->GetWorldPosition();
+
+            float closestX =
+                Clamp(circlePos.x,
+                    boxPos.x,
+                    boxPos.x + box->size.x);
+
+            float closestY =
+                Clamp(circlePos.y,
+                    boxPos.y,
+                    boxPos.y + box->size.y);
+
+            float dx =
+                circlePos.x - closestX;
+
+            float dy =
+                circlePos.y - closestY;
+
+            return dx * dx + dy * dy <
+                circle->radius * circle->radius;
         }
     };
 }

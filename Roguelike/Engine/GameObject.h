@@ -120,7 +120,15 @@ namespace GameEngine {
 			return result;
 		}
 
+		bool IsAlive() const { return _alive; }
+
+		void Destroy()
+		{
+			_alive = false;
+		}
+
 	protected:
 		std::vector<std::unique_ptr<Component>> _components;
+		bool _alive = true;
 	};
 }

@@ -4,6 +4,7 @@
 namespace GameEngine {
 	class CircleCollider :
 		public Collider {
+	public:
 		CircleCollider(GameObject* owner)
 			:Collider(owner)
 		{}

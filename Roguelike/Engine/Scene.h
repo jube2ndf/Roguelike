@@ -16,6 +16,19 @@ namespace GameEngine {
             return ptr;
         }
 
+        void DestroyMarked()
+        {
+            _objects.erase(
+                std::remove_if(
+                    _objects.begin(),
+                    _objects.end(),
+                    [](const std::unique_ptr<GameObject>& obj)
+                    {
+                        return !obj->IsAlive();
+                    }),
+                _objects.end());
+        }
+
         void DestroyAll()
         {
             _objects.clear();

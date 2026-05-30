@@ -9,6 +9,14 @@ namespace GameEngine {
 			Component(owner) 
 		{}
 
+		sf::Vector2f GetWorldPosition()
+		{
+			auto transform =
+				this->GetGameObject()->GetComponent<TransformComponent>();
+
+			return transform->GetWorldPosition();
+		}
+
 		bool isTrigger = false;
 	};
 }
