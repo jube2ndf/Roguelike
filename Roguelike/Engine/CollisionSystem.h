@@ -6,6 +6,7 @@
 #include "CircleCollider.h"
 #include "CollisionPair.h"
 #include "ITriggerListener.h"
+#include "CollisionPairHash.h"
 #include <algorithm>
 #include <unordered_set>
 #include <vector>
@@ -24,7 +25,7 @@ namespace GameEngine {
                 auto col = obj->GetComponent<Collider>();
                 if (col) colliders.push_back(col);
             }
-            std::unordered_set<CollisionPair> current;
+            std::unordered_set<CollisionPair, CollisionPairHash> current;
 
             for (size_t i = 0; i < colliders.size(); i++)
             {
@@ -49,7 +50,7 @@ namespace GameEngine {
             scene->DestroyMarked();
         }
     private:
-        std::unordered_set<CollisionPair>
+        std::unordered_set<CollisionPair, CollisionPairHash>
             _previousCollisions;
 
         void HandleTrigger(Collider* a, Collider* b)
@@ -116,7 +117,7 @@ namespace GameEngine {
         }
 
         void ProcessEvents(
-            const std::unordered_set<CollisionPair>& current)
+            const std::unordered_set<CollisionPair, CollisionPairHash>& current)
         {
             for (auto& pair : current)
             {

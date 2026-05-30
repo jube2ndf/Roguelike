@@ -25,6 +25,15 @@
     <Filter Include="Файлы заголовков\Components\Physics">
       <UniqueIdentifier>{524804f6-1c96-43bb-b1ba-19546bda50c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Managers">
+      <UniqueIdentifier>{8c9a3749-0961-495a-a129-7e8a467df655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Components\Physics\Cooliders">
+      <UniqueIdentifier>{d447f243-c370-43d6-b4c4-9d2703b74d90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Systems\Collision">
+      <UniqueIdentifier>{3f8f209c-9f62-452e-ad2e-eae673812c11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -45,9 +54,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -60,26 +66,44 @@
     <ClInclude Include="RenderSystem.h">
       <Filter>Файлы заголовков\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Rigidbody.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="UpdateSystem.h">
       <Filter>Файлы заголовков\Systems</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsSystem.h">
       <Filter>Файлы заголовков\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionSystem.h">
-      <Filter>Файлы заголовков\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>Файлы заголовков\Components\Physics</Filter>
-    </ClInclude>
     <ClInclude Include="AudioManager.h">
       <Filter>Файлы заголовков\Components</Filter>
     </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Файлы заголовков\Managers</Filter>
+    </ClInclude>
     <ClInclude Include="SceneManager.h">
+      <Filter>Файлы заголовков\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>Файлы заголовков\Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Файлы заголовков\Components\Physics\Cooliders</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Файлы заголовков\Components\Physics\Cooliders</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Файлы заголовков\Components\Physics\Cooliders</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionSystem.h">
+      <Filter>Файлы заголовков\Systems\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionPair.h">
+      <Filter>Файлы заголовков\Systems\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="ITriggerListener.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionPairHash.h">
+      <Filter>Файлы заголовков\Systems\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

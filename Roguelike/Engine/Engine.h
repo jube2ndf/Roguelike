@@ -5,6 +5,9 @@
 #else
 #define ENGINE_API __declspec(dllimport)
 #endif// !ENGINE_EXPORTS
+namespace GameEngine {
+	class SceneManager;
+}
 class Scene;
 
 class CollisionSystem;
