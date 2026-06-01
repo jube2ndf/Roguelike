@@ -161,6 +161,7 @@
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionManifold.h" />
     <ClInclude Include="CollisionPair.h" />
     <ClInclude Include="CollisionPairHash.h" />
     <ClInclude Include="CollisionSystem.h" />

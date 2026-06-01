@@ -72,9 +72,6 @@
     <ClInclude Include="PhysicsSystem.h">
       <Filter>Файлы заголовков\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="AudioManager.h">
-      <Filter>Файлы заголовков\Components</Filter>
-    </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Файлы заголовков\Managers</Filter>
     </ClInclude>
@@ -104,6 +101,12 @@
     </ClInclude>
     <ClInclude Include="CollisionPairHash.h">
       <Filter>Файлы заголовков\Systems\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManifold.h">
+      <Filter>Файлы заголовков\Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Файлы заголовков\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
