@@ -7,6 +7,7 @@
 #include "CollisionPair.h"
 #include "ITriggerListener.h"
 #include "CollisionPairHash.h"
+#include "CollisionManifold.h"
 #include <algorithm>
 #include <unordered_set>
 #include <vector>
@@ -26,18 +27,18 @@ namespace GameEngine {
                 if (col) colliders.push_back(col);
             }
             std::unordered_set<CollisionPair, CollisionPairHash> current;
-
+            CollisionManifold manifold;
             for (size_t i = 0; i < colliders.size(); i++)
             {
                 for (size_t j = i + 1; j < colliders.size(); j++)
                 {
-                    if (CheckCollision(colliders[i], colliders[j]))
+                    if (CheckCollision(colliders[i], colliders[j], manifold))
                     {
                         CollisionPair pair{ colliders[i], colliders[j] };
 
                         current.insert(pair);
 
-                        HandleTrigger(colliders[i], colliders[j]);
+                        HandleTrigger(colliders[i], colliders[j], manifold);
                     }
                 }
             }
@@ -53,7 +54,7 @@ namespace GameEngine {
         std::unordered_set<CollisionPair, CollisionPairHash>
             _previousCollisions;
 
-        void HandleTrigger(Collider* a, Collider* b)
+        void HandleTrigger(Collider* a, Collider* b, CollisionManifold& manifold)
         {
             if (a->isTrigger || b->isTrigger)
             {
@@ -61,39 +62,45 @@ namespace GameEngine {
             }
             else
             {
-                ResolveCollision(a, b);
+                ResolveCollision(a, b, manifold);
             }
         }
 
-        void ResolveCollision(Collider* a, Collider* b) {
+        void ResolveCollision(
+            Collider* a,
+            Collider* b,
+            const CollisionManifold& manifold)
+        {
             auto rbA = a->GetGameObject()->GetComponent<Rigidbody>();
             auto rbB = b->GetGameObject()->GetComponent<Rigidbody>();
 
-            if (!rbA && !rbB)
-                return;
             auto ta = a->GetGameObject()->GetComponent<TransformComponent>();
             auto tb = b->GetGameObject()->GetComponent<TransformComponent>();
 
-            sf::Vector2f delta = ta->GetWorldPosition() - tb->GetWorldPosition();
+            bool moveA =
+                rbA && !rbA->isKinematic;
 
-            float overlapX = 10.f; // позже заменишь на точный расчет
-            float overlapY = 10.f;
+            bool moveB =
+                rbB && !rbB->isKinematic;
 
-            if (std::abs(delta.x) > std::abs(delta.y))
+            if (!moveA && !moveB)
+                return;
+
+            sf::Vector2f correction =
+                manifold.normal * manifold.penetration;
+
+            if (moveA && moveB)
             {
-                if (rbA && !rbA->isKinematic)
-                    ta->MoveBy({ delta.x > 0 ? overlapX : -overlapX, 0 });
-
-                if (rbB && !rbB->isKinematic)
-                    tb->MoveBy({ delta.x < 0 ? overlapX : -overlapX, 0 });
+                ta->MoveBy(-correction * 0.5f);
+                tb->MoveBy(correction * 0.5f);
             }
-            else
+            else if (moveA)
             {
-                if (rbA && !rbA->isKinematic)
-                    ta->MoveBy({ 0, delta.y > 0 ? overlapY : -overlapY });
-
-                if (rbB && !rbB->isKinematic)
-                    tb->MoveBy({ 0, delta.y < 0 ? overlapY : -overlapY });
+                ta->MoveBy(-correction);
+            }
+            else if (moveB)
+            {
+                tb->MoveBy(correction);
             }
         }
 
@@ -170,43 +177,31 @@ namespace GameEngine {
 
         bool CheckCollision(
             Collider* a,
-            Collider* b)
+            Collider* b,
+            CollisionManifold& manifold)
         {
-            if (auto boxA =
-                dynamic_cast<BoxCollider*>(a))
+            if (auto boxA = dynamic_cast<BoxCollider*>(a))
             {
-                if (auto boxB =
-                    dynamic_cast<BoxCollider*>(b))
-                {
-                    return CheckBoxBox(boxA, boxB);
-                }
+                if (auto boxB = dynamic_cast<BoxCollider*>(b))
+                    return CheckBoxBox(boxA, boxB, manifold);
 
-                if (auto circleB =
-                    dynamic_cast<CircleCollider*>(b))
-                {
-                    return CheckBoxCircle(
-                        boxA,
-                        circleB);
-                }
+                if (auto circleB = dynamic_cast<CircleCollider*>(b))
+                    return CheckBoxCircle(boxA, circleB, manifold);
             }
 
-            if (auto circleA =
-                dynamic_cast<CircleCollider*>(a))
+            if (auto circleA = dynamic_cast<CircleCollider*>(a))
             {
-                if (auto circleB =
-                    dynamic_cast<CircleCollider*>(b))
-                {
-                    return CheckCircleCircle(
-                        circleA,
-                        circleB);
-                }
+                if (auto circleB = dynamic_cast<CircleCollider*>(b))
+                    return CheckCircleCircle(circleA, circleB, manifold);
 
-                if (auto boxB =
-                    dynamic_cast<BoxCollider*>(b))
+                if (auto boxB = dynamic_cast<BoxCollider*>(b))
                 {
-                    return CheckBoxCircle(
-                        boxB,
-                        circleA);
+                    bool result =
+                        CheckBoxCircle(boxB, circleA, manifold);
+
+                    manifold.normal *= -1.f;
+
+                    return result;
                 }
             }
 
@@ -215,42 +210,109 @@ namespace GameEngine {
 
         bool CheckBoxBox(
             BoxCollider* a,
-            BoxCollider* b)
+            BoxCollider* b,
+            CollisionManifold& manifold)
         {
-            auto posA =
-                a->GetWorldPosition();
+            auto posA = a->GetWorldPosition();
+            auto posB = b->GetWorldPosition();
 
-            auto posB =
-                b->GetWorldPosition();
+            float overlapX =
+                std::min<float>(posA.x + a->size.x,
+                    posB.x + b->size.x)
+                -
+                std::max<float>(posA.x, posB.x);
 
-            return
-                posA.x < posB.x + b->size.x &&
-                posA.x + a->size.x > posB.x &&
-                posA.y < posB.y + b->size.y &&
-                posA.y + a->size.y > posB.y;
+            if (overlapX <= 0.f)
+                return false;
+
+            float overlapY =
+                std::min<float>(posA.y + a->size.y,
+                    posB.y + b->size.y)
+                -
+                std::max<float>(posA.y, posB.y);
+
+            if (overlapY <= 0.f)
+                return false;
+
+            sf::Vector2f centerA =
+            {
+                posA.x + a->size.x * 0.5f,
+                posA.y + a->size.y * 0.5f
+            };
+
+            sf::Vector2f centerB =
+            {
+                posB.x + b->size.x * 0.5f,
+                posB.y + b->size.y * 0.5f
+            };
+
+            if (overlapX < overlapY)
+            {
+                manifold.penetration = overlapX;
+
+                manifold.normal =
+                {
+                    centerA.x < centerB.x ? -1.f : 1.f,
+                    0.f
+                };
+            }
+            else
+            {
+                manifold.penetration = overlapY;
+
+                manifold.normal =
+                {
+                    0.f,
+                    centerA.y < centerB.y ? -1.f : 1.f
+                };
+            }
+
+            return true;
         }
 
         bool CheckCircleCircle(
             CircleCollider* a,
-            CircleCollider* b)
+            CircleCollider* b,
+            CollisionManifold& manifold)
         {
-            auto posA =
-                a->GetWorldPosition();
+            auto posA = a->GetWorldPosition();
+            auto posB = b->GetWorldPosition();
 
-            auto posB =
-                b->GetWorldPosition();
-
-            float dx = posA.x - posB.x;
-            float dy = posA.y - posB.y;
+            sf::Vector2f delta =
+            {
+                posB.x - posA.x,
+                posB.y - posA.y
+            };
 
             float distanceSquared =
-                dx * dx + dy * dy;
+                delta.x * delta.x +
+                delta.y * delta.y;
 
             float radiusSum =
                 a->radius + b->radius;
 
-            return distanceSquared <
-                radiusSum * radiusSum;
+            if (distanceSquared >= radiusSum * radiusSum)
+                return false;
+
+            float distance = std::sqrt(distanceSquared);
+
+            if (distance < 0.0001f)
+            {
+                manifold.normal = { 1.f, 0.f };
+                manifold.penetration = radiusSum;
+                return true;
+            }
+
+            manifold.normal =
+            {
+                delta.x / distance,
+                delta.y / distance
+            };
+
+            manifold.penetration =
+                radiusSum - distance;
+
+            return true;
         }
 
         float Clamp(float value,
@@ -263,8 +325,9 @@ namespace GameEngine {
 
         bool CheckBoxCircle(
             BoxCollider* box,
-            CircleCollider* circle
-        ) {
+            CircleCollider* circle,
+            CollisionManifold& manifold)
+        {
             auto boxPos =
                 box->GetWorldPosition();
 
@@ -272,12 +335,14 @@ namespace GameEngine {
                 circle->GetWorldPosition();
 
             float closestX =
-                Clamp(circlePos.x,
+                Clamp(
+                    circlePos.x,
                     boxPos.x,
                     boxPos.x + box->size.x);
 
             float closestY =
-                Clamp(circlePos.y,
+                Clamp(
+                    circlePos.y,
                     boxPos.y,
                     boxPos.y + box->size.y);
 
@@ -287,8 +352,35 @@ namespace GameEngine {
             float dy =
                 circlePos.y - closestY;
 
-            return dx * dx + dy * dy <
+            float distanceSquared =
+                dx * dx + dy * dy;
+
+            float radiusSquared =
                 circle->radius * circle->radius;
+
+            if (distanceSquared >= radiusSquared)
+                return false;
+
+            float distance =
+                std::sqrt(distanceSquared);
+
+            if (distance < 0.0001f)
+            {
+                manifold.normal = { 1.f, 0.f };
+                manifold.penetration = circle->radius;
+                return true;
+            }
+
+            manifold.normal =
+            {
+                dx / distance,
+                dy / distance
+            };
+
+            manifold.penetration =
+                circle->radius - distance;
+
+            return true;
         }
     };
 }
