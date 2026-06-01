@@ -2,11 +2,11 @@
 #include <vector>
 #include <cassert>
 #include <algorithm>
-#include "Engine.h"
+#include <iostream>
 #include "Component.h"
 #include "TransformComponent.h"
 namespace GameEngine {
-	class GameObject
+	class ENGINE_API GameObject
 	{
 	public:
 		GameObject() {

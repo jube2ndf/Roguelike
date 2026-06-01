@@ -34,6 +34,9 @@
     <Filter Include="Файлы заголовков\Systems\Collision">
       <UniqueIdentifier>{3f8f209c-9f62-452e-ad2e-eae673812c11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Managers\Scene">
+      <UniqueIdentifier>{78cea297-2fea-40b0-8af1-9afe62d58d81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -75,9 +78,6 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Файлы заголовков\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Файлы заголовков\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Rigidbody.h">
       <Filter>Файлы заголовков\Components\Physics</Filter>
     </ClInclude>
@@ -108,6 +108,18 @@
     <ClInclude Include="AudioManager.h">
       <Filter>Файлы заголовков\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Файлы заголовков\Managers\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeSceneEvent.h">
+      <Filter>Файлы заголовков\Managers\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="EventBus.h">
+      <Filter>Файлы заголовков\Managers\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineAPI.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -137,5 +149,14 @@
     <ClCompile Include="Rigidbody.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

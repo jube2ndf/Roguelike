@@ -1,8 +1,7 @@
 #pragma once
-#include "Engine.h"
 #include "Component.h"
 namespace GameEngine {
-    class TransformComponent :
+    class ENGINE_API TransformComponent :
         public Component
     {
 	public:

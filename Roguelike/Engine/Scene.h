@@ -6,38 +6,20 @@ namespace GameEngine {
 	class ENGINE_API Scene
 	{
 	public:
-        GameObject* CreateObject()
-        {
-            auto obj = std::make_unique<GameObject>();
-            GameObject* ptr = obj.get();
+		Scene() = default;
+		Scene(const Scene&) = delete;
+		Scene& operator=(const Scene&) = delete;
+		~Scene() = default;
 
-            _objects.push_back(std::move(obj));
+        GameObject* CreateObject();
 
-            return ptr;
-        }
+        void DestroyMarked();
 
-        void DestroyMarked()
-        {
-            _objects.erase(
-                std::remove_if(
-                    _objects.begin(),
-                    _objects.end(),
-                    [](const std::unique_ptr<GameObject>& obj)
-                    {
-                        return !obj->IsAlive();
-                    }),
-                _objects.end());
-        }
+        void DestroyAll();
 
-        void DestroyAll()
-        {
-            _objects.clear();
-        }
+		std::vector<std::unique_ptr<GameObject>>& GetObjects();
 
-        std::vector<std::unique_ptr<GameObject>>& GetObjects()
-        {
-            return _objects;
-        }
+		
 	private:
 		std::vector <std::unique_ptr< GameObject >> _objects;
 	};

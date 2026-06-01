@@ -2,7 +2,7 @@
 #include "Component.h"
 
 namespace GameEngine {
-    class Rigidbody :
+    class ENGINE_API Rigidbody :
         public Component
     {
     public:

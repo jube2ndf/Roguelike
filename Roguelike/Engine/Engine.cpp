@@ -38,6 +38,11 @@ void Engine::Run()
     sf::Clock clock;
     float accumulator = 0.f;
 
+    GameEngine::RenderSystem render;
+    GameEngine::PhysicsSystem physics;
+    GameEngine::CollisionSystem collision;
+    GameEngine::UpdateSystem update;
+
     while (this->_window.isOpen())
     {
         float dt = clock.restart().asSeconds();
@@ -58,19 +63,19 @@ void Engine::Run()
         if (!scene)
             continue;
 
-        this->_update.Update(scene, dt);
+        update.Update(scene, dt);
 
 
         while (accumulator >= FIXED_TIMESTEP)
         {
-            this->_physics.Update(scene, FIXED_TIMESTEP);
-            this->_collision.Update(scene);
+            physics.Update(scene, FIXED_TIMESTEP);
+            collision.Update(scene);
 
             accumulator -= FIXED_TIMESTEP;
         }
 
 
-        this->_render.Render(this->_window, scene);
+        render.Render(this->_window, scene);
     }
 }
 

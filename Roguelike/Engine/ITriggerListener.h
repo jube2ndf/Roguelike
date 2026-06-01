@@ -2,7 +2,7 @@
 #include "Collider.h"
 
 namespace GameEngine {
-    class ITriggerListener
+    class ENGINE_API ITriggerListener
     {
     public:
         virtual ~ITriggerListener() = default;

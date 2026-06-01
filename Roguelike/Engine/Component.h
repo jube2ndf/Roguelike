@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine.h"
+#include "EngineAPI.h"
 #include <iostream>
 namespace GameEngine {
 	class GameObject;

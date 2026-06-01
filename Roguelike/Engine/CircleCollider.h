@@ -2,7 +2,7 @@
 #include "Collider.h"
 
 namespace GameEngine {
-	class CircleCollider :
+	class ENGINE_API CircleCollider :
 		public Collider {
 	public:
 		CircleCollider(GameObject* owner)

@@ -4,8 +4,8 @@
 
 GameEngine::Scene& GameEngine::SceneManager::CreateScene(const std::string& name)
 {
-    auto scene = std::make_unique<Scene>();
-    Scene* ptr = scene.get();
+    auto scene = std::make_unique<GameEngine::Scene>();
+    GameEngine::Scene* ptr = scene.get();
 
     _scenes[name] = std::move(scene);
 
