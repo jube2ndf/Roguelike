@@ -7,13 +7,13 @@ namespace GameEngine
     class SceneManager
     {
     public:
-        Scene& CreateScene();
-        void SwitchScene(int id);
+        Scene& CreateScene(const std::string& name);
+        void SwitchScene(const std::string& name);
 
-        Scene& GetActiveScene();
+        Scene* GetActiveScene();
 
     private:
-        std::vector<std::unique_ptr<Scene>> _scenes;
+        std::unordered_map<std::string, std::unique_ptr<Scene>> _scenes;
         Scene* _activeScene = nullptr;
     };
 }

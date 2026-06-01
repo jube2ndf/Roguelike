@@ -10,6 +10,7 @@ namespace GameEngine {
             sf::RenderWindow& window,
             Scene* scene)
         {
+            window.clear();
             for (auto& object : scene->GetObjects())
             {
                 auto transform =
@@ -32,6 +33,7 @@ namespace GameEngine {
 
                 window.draw(*renderer->shape);
             }
+            window.display();
         }
 	};
 }

@@ -3,7 +3,7 @@
 #include <memory>
 #include "GameObject.h"
 namespace GameEngine {
-	class Scene
+	class ENGINE_API Scene
 	{
 	public:
         GameObject* CreateObject()

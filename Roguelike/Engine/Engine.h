@@ -20,12 +20,18 @@ class ENGINE_API Engine {
 public:
 	Engine();
 	void Initialize();
-	void Run(GameEngine::SceneManager& scenes);
+	void Run();
 
 	GameEngine::SceneManager& GetSceneManager();
 
 private:
+	sf::RenderWindow _window;
 	GameEngine::SceneManager _sceneManager;
+
+	GameEngine::RenderSystem _render;
+	GameEngine::PhysicsSystem _physics;
+	GameEngine::CollisionSystem _collision;
+	GameEngine::UpdateSystem _update;
 };
 #endif // !ENGINE_H
 

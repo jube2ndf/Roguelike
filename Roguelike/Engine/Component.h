@@ -4,7 +4,7 @@
 namespace GameEngine {
 	class GameObject;
 
-	class Component
+	class ENGINE_API Component
 	{
 	public:
 		static constexpr bool Unique = false;

@@ -9,9 +9,13 @@
 #include "UpdateSystem.h"
 #include "CollisionSystem.h"
 #include "SceneManager.h"
+#include "EventBus.h"
+#include "ChangeSceneEvent.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <windows.h>
+
+constexpr float FIXED_TIMESTEP = 1.0f / 60.0f;
 
 Engine::Engine()
 {
@@ -21,41 +25,52 @@ Engine::Engine()
 void Engine::Initialize()
 {
 	std::cout << "Engine initialized\n";
+    GameEngine::EventBus::Subscribe<GameEngine::ChangeSceneEvent>(
+        [this](const GameEngine::ChangeSceneEvent& e)
+        {
+            _sceneManager.SwitchScene(e.sceneName);
+        });
+    _window.create(sf::VideoMode({ 1280, 720 }), "Game");
 }
 
-void Engine::Run(GameEngine::SceneManager& scenes)
+void Engine::Run()
 {
-    sf::RenderWindow window(sf::VideoMode({ 1280, 720 }), "Engine");
-
-    GameEngine::RenderSystem render;
-    GameEngine::PhysicsSystem physics;
-    GameEngine::CollisionSystem collision;
-    GameEngine::UpdateSystem update;
-
     sf::Clock clock;
+    float accumulator = 0.f;
 
-    while (window.isOpen())
+    while (this->_window.isOpen())
     {
         float dt = clock.restart().asSeconds();
 
-        while (const std::optional<sf::Event> e = window.pollEvent())
+        if (dt > 0.25f)
+            dt = 0.25f;
+
+        accumulator += dt;
+
+        while (const std::optional<sf::Event> e = this->_window.pollEvent())
         {
             if (e->is<sf::Event::Closed>())
-                window.close();
+                this->_window.close();
         }
 
-        GameEngine::Scene* scene = scenes.GetActiveScene();
+        GameEngine::Scene* scene = this->_sceneManager.GetActiveScene();
 
         if (!scene)
             continue;
 
-        update.Update(scene, dt);
-        physics.Update(scene, dt);
-        collision.Update(scene);
+        this->_update.Update(scene, dt);
 
-        window.clear();
-        render.Render(window, scene);
-        window.display();
+
+        while (accumulator >= FIXED_TIMESTEP)
+        {
+            this->_physics.Update(scene, FIXED_TIMESTEP);
+            this->_collision.Update(scene);
+
+            accumulator -= FIXED_TIMESTEP;
+        }
+
+
+        this->_render.Render(this->_window, scene);
     }
 }
 
