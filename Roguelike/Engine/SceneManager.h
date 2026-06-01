@@ -7,27 +7,13 @@ namespace GameEngine
     class SceneManager
     {
     public:
-        void LoadScene(std::unique_ptr<Scene> newScene)
-        {
-            _activeScene = std::move(newScene);
-        }
+        Scene& CreateScene();
+        void SwitchScene(int id);
 
-        Scene* GetActiveScene()
-        {
-            return _activeScene.get();
-        }
-
-        bool HasScene() const
-        {
-            return _activeScene != nullptr;
-        }
-
-        void UnloadScene()
-        {
-            _activeScene.reset();
-        }
+        Scene& GetActiveScene();
 
     private:
-        std::unique_ptr<Scene> _activeScene;
+        std::vector<std::unique_ptr<Scene>> _scenes;
+        Scene* _activeScene = nullptr;
     };
 }

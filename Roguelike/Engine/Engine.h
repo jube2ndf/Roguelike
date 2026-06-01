@@ -21,6 +21,11 @@ public:
 	Engine();
 	void Initialize();
 	void Run(GameEngine::SceneManager& scenes);
+
+	GameEngine::SceneManager& GetSceneManager();
+
+private:
+	GameEngine::SceneManager _sceneManager;
 };
 #endif // !ENGINE_H
 

@@ -58,3 +58,8 @@ void Engine::Run(GameEngine::SceneManager& scenes)
         window.display();
     }
 }
+
+GameEngine::SceneManager& Engine::GetSceneManager()
+{
+    return this->_sceneManager;
+}
