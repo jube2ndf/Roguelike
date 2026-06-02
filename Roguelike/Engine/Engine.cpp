@@ -74,7 +74,6 @@ void Engine::Run()
             accumulator -= FIXED_TIMESTEP;
         }
 
-
         render.Render(this->_window, scene);
     }
 }
