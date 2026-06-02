@@ -1,11 +1,12 @@
 #pragma once
+#include "EngineAPI.h"
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 #include <memory>
 #include <cassert>
 #include <string>
 namespace GameEngine {
-	class TextureManager final{
+	class ENGINE_API TextureManager final{
 	public:
 		static sf::Texture& load(const std::string& path);
 	private:
