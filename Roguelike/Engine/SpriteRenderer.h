@@ -14,6 +14,9 @@ namespace GameEngine {
         {
             
         }
+        sf::Sprite& GetSprite() {
+            return this->_sprite;
+        }
     protected:
         sf::Sprite _sprite;
 
