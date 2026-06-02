@@ -1,5 +1,7 @@
 #pragma once
 #include "Component.h"
+#include "TransformComponent.h"
+#include "GameObject.h"
 
 namespace GameEngine {
 	class Collider :
