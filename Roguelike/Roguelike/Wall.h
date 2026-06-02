@@ -24,7 +24,7 @@ namespace Roguelike {
             auto rb = wall->AddComponent<GameEngine::Rigidbody>();
             rb->isKinematic = true;
 
-            auto rend = wall->AddComponent<GameEngine::SpriteRenderer>(GameEngine::TextureManager::load("../Resources/Textures/Wall.png"));
+            auto rend = wall->AddComponent<GameEngine::SpriteRenderer>(GameEngine::TextureManager::load("./Resources/Textures/Wall.png"));
 
             return wall;
         }
