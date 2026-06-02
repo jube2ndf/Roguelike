@@ -31,6 +31,8 @@ void Engine::Initialize()
             _sceneManager.SwitchScene(e.sceneName);
         });
     _window.create(sf::VideoMode({ 1280, 720 }), "Game");
+    std::cout << "Window created\n";
+    std::cout << "isOpen: " << _window.isOpen() << std::endl;
 }
 
 void Engine::Run()
