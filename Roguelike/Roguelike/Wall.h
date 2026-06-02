@@ -5,12 +5,13 @@
 #include <BoxCollider.h>
 #include <Scene.h>
 #include <SpriteRenderer.h>
+#include <TextureManager.h>
 #include <TransformComponent.h>
 namespace Roguelike {
 	class Wall
 	{
 	public:
-        GameEngine::GameObject* CreateWall(GameEngine::Scene& scene, sf::Vector2f pos, sf::Vector2f size)
+        static GameEngine::GameObject* CreateWall(GameEngine::Scene& scene, sf::Vector2f pos, sf::Vector2f size)
         {
             auto wall = scene.CreateObject();
 
@@ -23,7 +24,7 @@ namespace Roguelike {
             auto rb = wall->AddComponent<GameEngine::Rigidbody>();
             rb->isKinematic = true;
 
-            auto rend = wall->AddComponent<GameEngine::SpriteRenderer>();
+            auto rend = wall->AddComponent<GameEngine::SpriteRenderer>(GameEngine::TextureManager::load("../Resources/Textures/Wall.png"));
 
             return wall;
         }
