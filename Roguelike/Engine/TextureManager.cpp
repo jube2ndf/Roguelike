@@ -14,8 +14,9 @@ namespace GameEngine
 
 		if (!texture->loadFromFile(path))
 		{
-			throw std::runtime_error(
-				"Failed to load texture: " + path);
+			std::cout << "FAILED TO LOAD: " << path << std::endl;
+			std::cout << "ABS PATH: " << std::filesystem::absolute(path) << std::endl;
+			throw std::runtime_error("Texture load failed");
 		}
 
 		auto& ref = *texture;
