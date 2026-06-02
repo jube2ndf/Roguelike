@@ -3,6 +3,10 @@
 #include "TransformComponent.h"
 namespace GameEngine
 {
+	void TransformComponent::SetWorldPosition(sf::Vector2f& newPosition)
+	{
+		this->_position = newPosition;
+	}
 	void TransformComponent::Update(float deltaTime)
 	{
 	
