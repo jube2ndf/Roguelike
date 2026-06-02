@@ -1,9 +1,10 @@
 ﻿#include <Engine.h>
-
+#include "Game.h"
 
 int main()
 {
 	Engine engine;
-	engine.Initialize();
+	Roguelike::Game game{ engine };
+	game.Initialize();
 	engine.Run();
 }
