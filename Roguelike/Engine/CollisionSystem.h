@@ -24,8 +24,9 @@ namespace GameEngine {
 
             for (auto& obj : scene->GetObjects())
             {
-                auto col = obj->GetComponent<Collider>();
-                if (col) colliders.push_back(col);
+                auto comps = obj->GetComponents<Collider>();
+                for (auto* col : comps)
+                    colliders.push_back(col);
             }
             std::unordered_set<CollisionPair, CollisionPairHash> current;
             CollisionManifold manifold;
@@ -35,17 +36,18 @@ namespace GameEngine {
                 {
                     if (CheckCollision(colliders[i], colliders[j], manifold))
                     {
-                        std::cout << "Collision\n";
+                        //std::cout << "Collision\n";
                         if (colliders[i]->isTrigger || colliders[j]->isTrigger)
                         {
+                            //std::cout << "SendTriggerEvent\n";
                             CollisionPair pair{ colliders[i], colliders[j] };
-
+                            
                             current.insert(pair);
                             SendTriggerEvent(colliders[i], colliders[j]);
                         }
                         else
                         {
-                            std::cout << "ResolveCollision\n" << manifold.penetration << "\n";
+                            //std::cout << "ResolveCollision\n" << manifold.penetration << "\n";
                             ResolveCollision(colliders[i], colliders[j], manifold);
                         }
                     }
@@ -182,10 +184,12 @@ namespace GameEngine {
                 if (_previousCollisions.find(pair) == _previousCollisions.end())
                 {
                     CallListenersEnter(pair.a, pair.b);
+                    CallListenersEnter(pair.b, pair.a);
                 }
                 else
                 {
                     CallListenersStay(pair.a, pair.b);
+                    CallListenersStay(pair.b, pair.a);
                 }
             }
 
@@ -194,6 +198,7 @@ namespace GameEngine {
                 if (current.find(pair) == current.end())
                 {
                     CallListenersExit(pair.a, pair.b);
+                    CallListenersExit(pair.b, pair.a);
                 }
             }
         }

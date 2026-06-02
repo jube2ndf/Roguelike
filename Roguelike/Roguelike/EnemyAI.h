@@ -12,7 +12,7 @@ namespace Roguelike {
         EnemyAI(GameEngine::GameObject* owner):
             GameEngine::BoxCollider(owner) {
             this->isTrigger = true;
-            this->size = { 200.f, 200.f };
+            this->size = { 500.f, 500.f };
         }
         GameEngine::GameObject* target = nullptr;
         float speed = 120.f;

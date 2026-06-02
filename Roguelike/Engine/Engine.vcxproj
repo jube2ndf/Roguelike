@@ -188,6 +188,7 @@
     <ClInclude Include="UpdateSystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="dllmain.cpp" />

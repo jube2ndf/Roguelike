@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Wall.h"
 #include "Enemy.h"
+#include <AudioManager.h>
 
 Roguelike::Game::Game(Engine& engine)
 {
@@ -10,6 +11,8 @@ Roguelike::Game::Game(Engine& engine)
 
 void Roguelike::Game::Initialize()
 {
+    GameEngine::AudioManager::Initialize();
+    GameEngine::AudioManager::PlayMusic("./Resources/Music/fon.ogg", true);
     this->_engine->Initialize();
     this->CreateLevel1();
 
