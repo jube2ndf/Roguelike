@@ -12,7 +12,12 @@ namespace GameEngine {
             :Component(owner),
             _sprite(texture)
         {
-            
+            const float TILE_SIZE = 64.f;
+
+            _sprite.setScale(
+                { TILE_SIZE / texture.getSize().x,
+                TILE_SIZE / texture.getSize().y }
+            );
         }
         sf::Sprite& GetSprite() {
             return this->_sprite;
