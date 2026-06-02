@@ -13,5 +13,6 @@ namespace GameEngine {
 			return { radius * 2.f, radius * 2.f };
 		}
 		float radius = 25.f;
+
 	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Collider.h"
+#include "CircleCollider.h"
 #include <SFML/System/Vector2.hpp>
 
 namespace GameEngine {
@@ -12,9 +13,15 @@ namespace GameEngine {
             : Collider(owner)
         {}
 
-        sf::Vector2f GetSize() const override
-        {
+        sf::Vector2f GetSize() const override {
             return size;
         }
+
+        sf::Vector2f GetHalfSize() const {
+            return { size.x / 2.f, size.y / 2.f };
+        }
+
+        std::vector<sf::Vector2f> GetWorldVertices() const;
+
     };
 }

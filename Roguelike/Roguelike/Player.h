@@ -6,6 +6,9 @@
 #include <ShapeRenderer.h>
 #include "PlayerMovementComponent.h"
 #include <SFML/System/Vector2.hpp>
+#include <TextureManager.h>
+#include <SpriteRenderer.h>
+#include <TagComponent.h>
 namespace Roguelike {
 	class Player
 	{
@@ -22,15 +25,16 @@ namespace Roguelike {
             auto rb =
                 player->AddComponent<GameEngine::Rigidbody>();
 
-            rb->drag = 5.f;
+            rb->mass = 5.f;
 
             auto collider =
                 player->AddComponent<GameEngine::BoxCollider>();
 
-            auto shapeRenderer =
-                player->AddComponent<GameEngine::ShapeRenderer>();
+            auto rend = player->AddComponent<GameEngine::SpriteRenderer>(GameEngine::TextureManager::load("./Resources/Textures/Player.png"));
 
             collider->size = { 32,32 };
+
+            player->AddComponent<GameEngine::TagComponent>("Player");
 
             return player;
         }

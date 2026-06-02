@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Scene.h"
-
+#include "TagComponent.h"
 
 GameEngine::GameObject* GameEngine::Scene::CreateObject()
 {
@@ -23,6 +23,20 @@ void GameEngine::Scene::DestroyMarked()
                 return !obj->IsAlive();
             }),
         _objects.end());
+}
+
+GameEngine::GameObject* GameEngine::Scene::FindWithTag(std::string tagName)
+{
+    for (int i = 0;
+        i < this->_objects.size();
+        i++) 
+    {
+        auto tag = this->_objects[i]->GetComponent<TagComponent>();
+        if (tag && tag->GetTag() == tagName) {
+            return this->_objects[i].get();
+        }
+    }
+    return nullptr;
 }
 
 void GameEngine::Scene::DestroyAll()

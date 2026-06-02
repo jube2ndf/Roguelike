@@ -3,7 +3,10 @@
 namespace GameEngine {
     struct CollisionManifold
     {
-        sf::Vector2f normal;   // направление выталкивания
-        float penetration;     // глубина пересечения
+        bool collided = false;
+
+        sf::Vector2f normal;// направление выталкивания
+
+        float penetration = 0.f;// глубина пересечения  
     };
 }

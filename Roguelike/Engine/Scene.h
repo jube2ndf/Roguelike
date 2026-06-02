@@ -15,6 +15,8 @@ namespace GameEngine {
 
         void DestroyMarked();
 
+		GameObject* FindWithTag(std::string tagName);
+
         void DestroyAll();
 
 		std::vector<std::unique_ptr<GameObject>>& GetObjects();

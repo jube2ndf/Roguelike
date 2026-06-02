@@ -65,17 +65,15 @@ void Engine::Run()
         if (!scene)
             continue;
 
-        update.Update(scene, dt);
-
-
         while (accumulator >= FIXED_TIMESTEP)
         {
             physics.Update(scene, FIXED_TIMESTEP);
             collision.Update(scene);
 
             accumulator -= FIXED_TIMESTEP;
+            
         }
-
+        update.Update(scene, dt);
         render.Render(this->_window, scene);
     }
 }
