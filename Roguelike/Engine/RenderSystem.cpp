@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "RenderSystem.h"
-
+#include "Collider.h"
 #include "Scene.h"
 #include "GameObject.h"
 #include "TransformComponent.h"
@@ -39,16 +39,33 @@ void GameEngine::RenderSystem::Render(sf::RenderWindow& window, Scene* scene)
         if (auto spriteRenderer =
             object->GetComponent<SpriteRenderer>())
         {
-            spriteRenderer->GetSprite().setPosition(
-                transform->GetWorldPosition());
+            auto& sprite = spriteRenderer->GetSprite();
 
-            spriteRenderer->GetSprite().setRotation(
-                sf::degrees(transform->GetWorldRotation()));
+            sprite.setPosition(transform->GetWorldPosition());
 
-            spriteRenderer->GetSprite().setScale(
-                transform->GetWorldScale());
+            sprite.setRotation(sf::degrees(transform->GetWorldRotation()));
 
-            window.draw(spriteRenderer->GetSprite());
+            sf::Vector2f worldSize;
+
+            // ===== 1. ПЫТАЕМСЯ БРАТЬ РАЗМЕР ИЗ COLLIDER =====
+            if (auto collider = object->GetComponent<Collider>())
+            {
+                worldSize = collider->GetSize();
+            }
+            // ===== 2. ИНАЧЕ FALLBACK НА TRANSFORM =====
+            else
+            {
+                worldSize = transform->GetWorldScale();
+            }
+
+            auto texSize = sprite.getTexture().getSize();
+
+            sprite.setScale(
+                { worldSize.x / static_cast<float>(texSize.x),
+                worldSize.y / static_cast<float>(texSize.y) }
+            );
+
+            window.draw(sprite);
         }
     }
 

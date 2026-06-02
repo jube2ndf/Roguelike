@@ -11,5 +11,10 @@ namespace GameEngine {
         BoxCollider(GameObject* owner)
             : Collider(owner)
         {}
+
+        sf::Vector2f GetSize() const override
+        {
+            return size;
+        }
     };
 }
