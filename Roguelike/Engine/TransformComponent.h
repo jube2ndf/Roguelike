@@ -14,6 +14,7 @@ namespace GameEngine {
 		void Update(float deltaTime) override;
 
 		void MoveBy(const sf::Vector2f& offset);
+		void SetWorldPosition(sf::Vector2f& newPosition);
 		void RotateBy(float offset);
 		void ScaleBy(const sf::Vector2f& scaleOffset);
 
