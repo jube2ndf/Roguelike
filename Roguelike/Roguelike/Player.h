@@ -3,6 +3,7 @@
 #include <Rigidbody.h>
 #include <BoxCollider.h>
 #include <Scene.h>
+#include <ShapeRenderer.h>
 #include "PlayerMovementComponent.h"
 namespace Roguelike {
 	class Player
@@ -21,6 +22,9 @@ namespace Roguelike {
 
             auto collider =
                 player->AddComponent<GameEngine::BoxCollider>();
+
+            auto shapeRenderer =
+                player->AddComponent<GameEngine::ShapeRenderer>();
 
             collider->size = { 32,32 };
 

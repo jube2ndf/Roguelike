@@ -8,6 +8,7 @@ Roguelike::Game::Game(Engine& engine)
 
 void Roguelike::Game::Initialize()
 {
+    this->_engine->Initialize();
     this->CreateLevel1();
 
     this->_engine->GetSceneManager()
