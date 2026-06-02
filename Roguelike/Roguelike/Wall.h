@@ -4,7 +4,7 @@
 #include <Rigidbody.h>
 #include <BoxCollider.h>
 #include <Scene.h>
-#include <ShapeRenderer.h>
+#include <SpriteRenderer.h>
 #include <TransformComponent.h>
 namespace Roguelike {
 	class Wall
@@ -23,8 +23,7 @@ namespace Roguelike {
             auto rb = wall->AddComponent<GameEngine::Rigidbody>();
             rb->isKinematic = true;
 
-            auto rend = wall->AddComponent<GameEngine::ShapeRenderer>();
-            rend->shape = std::make_unique<sf::RectangleShape>(size);
+            auto rend = wall->AddComponent<GameEngine::SpriteRenderer>();
 
             return wall;
         }
