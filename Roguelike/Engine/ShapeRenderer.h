@@ -2,6 +2,7 @@
 #include <SFML/Graphics/Shape.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include "Component.h"
+#include "EngineAPI.h"
 
 namespace GameEngine {
     class ShapeRenderer : public Component

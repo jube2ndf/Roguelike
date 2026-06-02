@@ -1,8 +1,9 @@
 #pragma once
 #include <SFML/Graphics/Sprite.hpp>
 #include "Component.h"
+#include "EngineAPI.h"
 namespace GameEngine {
-    class SpriteRenderer :
+    class ENGINE_API SpriteRenderer :
         public Component
     {
     public:
