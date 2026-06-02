@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include <SFML/System/Vector2.hpp>
 namespace GameEngine {
     class ENGINE_API TransformComponent :
         public Component
