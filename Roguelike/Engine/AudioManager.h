@@ -1,5 +1,5 @@
 #pragma once
-
+#include "EngineAPI.h"
 #include <SFML/Audio.hpp>
 #include <unordered_map>
 #include <vector>
@@ -9,7 +9,7 @@
 
 namespace GameEngine
 {
-    class AudioManager final
+    class ENGINE_API AudioManager final
     {
     public:
 
