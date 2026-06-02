@@ -8,7 +8,10 @@ namespace GameEngine {
 		CircleCollider(GameObject* owner)
 			:Collider(owner)
 		{}
-
+		sf::Vector2f GetSize() const override
+		{
+			return { radius * 2.f, radius * 2.f };
+		}
 		float radius = 25.f;
 	};
 }

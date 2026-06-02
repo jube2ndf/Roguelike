@@ -17,6 +17,11 @@ namespace GameEngine {
 			return transform->GetWorldPosition();
 		}
 
+		virtual sf::Vector2f GetSize() const
+		{
+			return { 0.f, 0.f };
+		}
+
 		bool isTrigger = false;
 	};
 }
