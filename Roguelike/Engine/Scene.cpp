@@ -4,7 +4,12 @@
 
 GameEngine::GameObject* GameEngine::Scene::CreateObject()
 {
-	return nullptr;
+    auto obj = std::make_unique<GameObject>();
+    GameObject* ptr = obj.get();
+
+    _objects.push_back(std::move(obj));
+
+    return ptr;
 }
 
 void GameEngine::Scene::DestroyMarked()
