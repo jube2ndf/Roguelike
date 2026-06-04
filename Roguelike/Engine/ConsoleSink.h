@@ -8,7 +8,11 @@ namespace GameEngine {
         void Write(const LogMessage& message) override
         {
             std::cout << this->logLevelToString(message.Type)
-                << message.Text << std::endl;
+                    << "[" << message.Category << "] "
+                    << message.Text
+                    << " (" << message.File << ":"
+                    << message.Line << ")"
+                    << std::endl;
         }
     };
 }

@@ -14,17 +14,22 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <windows.h>
+#include "Logger.h"
+#include "ConsoleSink.h"
+#include "FileSink.h"
+
 
 constexpr float FIXED_TIMESTEP = 1.0f / 60.0f;
 
 Engine::Engine()
 {
-	
+    GameEngine::Logger::Instance().AddSink(std::make_unique<GameEngine::ConsoleSink>());
+    GameEngine::Logger::Instance().AddSink(std::make_unique<GameEngine::FileSink>("log.txt"));
 }
 
 void Engine::Initialize()
 {
-	std::cout << "Engine initialized\n";
+    LOG_INFO("Engine", "Engine initialized");
     GameEngine::EventBus::Subscribe<GameEngine::ChangeSceneEvent>(
         [this](const GameEngine::ChangeSceneEvent& e)
         {

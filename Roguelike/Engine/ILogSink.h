@@ -13,10 +13,10 @@ namespace GameEngine {
     protected:
         std::string logLevelToString(LogType level) {
             switch (level) {
-            case LogType::INFO: return "[INFO]";
-            case LogType::WARNING: return "[WARNING]";
-            case LogType::ERROR: return "[ERROR]";
-            case LogType::FATAL: return "[FATAL]";
+            case LogType::Info: return "[INFO]";
+            case LogType::Warning: return "[WARNING]";
+            case LogType::Error: return "[ERROR]";
+            case LogType::Fatal: return "[FATAL]";
             default: return "[UNKNOWN]";
             }
         }

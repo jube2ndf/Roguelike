@@ -4,10 +4,9 @@
 namespace GameEngine {
 	enum class ENGINE_API LogType
 	{
-		INFO = 0,
-
-		WARNING,
-		ERROR,
-		FATAL,
+		Info,
+		Warning,
+		Error,
+		Fatal
 	};
 }

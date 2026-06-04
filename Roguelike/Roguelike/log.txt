@@ -1,0 +1,2 @@
+[INFO]Engine initialized
+[INFO][Engine] Engine initialized (D:\Git\RogueLike\Roguelike\Roguelike\Engine\Engine.cpp:32)

@@ -8,11 +8,11 @@ namespace GameEngine {
     {
         LogType Type;
 
-        std::string Category;
+        std::string_view Category;
         std::string Text;
 
-        std::string File;
-        std::string Function;
+        const char* File;
+        const char* Function;
 
         uint32_t Line;
 

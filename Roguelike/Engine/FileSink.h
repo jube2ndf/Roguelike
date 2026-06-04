@@ -14,7 +14,11 @@ namespace GameEngine {
         void Write(const LogMessage& message) override
         {
             m_File << this->logLevelToString(message.Type)
-                << message.Text << std::endl;
+                << "[" << message.Category << "] "
+                << message.Text
+                << " (" << message.File << ":"
+                << message.Line << ")"
+                << std::endl;;
         }
 
     private:
