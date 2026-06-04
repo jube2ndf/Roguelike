@@ -167,12 +167,17 @@
     <ClInclude Include="CollisionPairHash.h" />
     <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="ConsoleSink.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="EngineAPI.h" />
     <ClInclude Include="EventBus.h" />
+    <ClInclude Include="FileSink.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="ILogSink.h" />
     <ClInclude Include="ITriggerListener.h" />
+    <ClInclude Include="LogMessage.h" />
+    <ClInclude Include="LogType.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PhysicsSystem.h" />
@@ -191,8 +196,10 @@
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
+    <ClCompile Include="ConsoleSink.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="FileSink.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -37,6 +37,9 @@
     <Filter Include="Файлы заголовков\Managers\Scene">
       <UniqueIdentifier>{78cea297-2fea-40b0-8af1-9afe62d58d81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Logger">
+      <UniqueIdentifier>{222726e7-3d40-47af-8d61-214baa7e3b8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -126,6 +129,21 @@
     <ClInclude Include="AudioManager.h">
       <Filter>Файлы заголовков\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="LogType.h">
+      <Filter>Файлы заголовков\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogSink.h">
+      <Filter>Файлы заголовков\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="LogMessage.h">
+      <Filter>Файлы заголовков\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleSink.h">
+      <Filter>Файлы заголовков\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSink.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -168,6 +186,12 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="AudioManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleSink.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSink.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
