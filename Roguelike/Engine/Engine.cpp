@@ -34,10 +34,10 @@ void Engine::Initialize()
         [this](const GameEngine::ChangeSceneEvent& e)
         {
             _sceneManager.SwitchScene(e.sceneName);
+            LOG_INFO("SceneManager", "Change scene: " + e.sceneName);
         });
     _window.create(sf::VideoMode({ 1280, 720 }), "Game");
-    std::cout << "Window created\n";
-    std::cout << "isOpen: " << _window.isOpen() << std::endl;
+    LOG_INFO("Engine", "Window created");
 }
 
 void Engine::Run()
