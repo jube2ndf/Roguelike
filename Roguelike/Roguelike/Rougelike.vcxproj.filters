@@ -19,6 +19,9 @@
     <Filter Include="Файлы заголовков\Enemy">
       <UniqueIdentifier>{562115ae-111c-4981-99f5-b7bac62a5845}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\LivingEntities">
+      <UniqueIdentifier>{ad8e0ed5-6cea-47d9-9f3c-89fc2e121626}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -43,6 +46,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="EnemyMovementComponent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthComponent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -70,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="EnemyMovementComponent.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthComponent.h">
+      <Filter>Файлы заголовков\LivingEntities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
