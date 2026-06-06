@@ -41,6 +41,11 @@ namespace Roguelike {
 					GetMaxHealth());
 		}
 
+		void TakeBonus(float bonus)
+		{
+			bonusMaxHealth += bonus;
+		}
+
 	protected:
 		float baseMaxHealth;
 		float bonusMaxHealth;
