@@ -51,6 +51,9 @@
     <ClCompile Include="HealthComponent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="ArmorComponent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -78,6 +81,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="HealthComponent.h">
+      <Filter>Файлы заголовков\LivingEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorComponent.h">
       <Filter>Файлы заголовков\LivingEntities</Filter>
     </ClInclude>
   </ItemGroup>

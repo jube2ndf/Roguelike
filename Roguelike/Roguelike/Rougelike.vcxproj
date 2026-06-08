@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArmorComponent.cpp" />
     <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EnemyChaseComponent.cpp" />
     <ClCompile Include="EnemyMovementComponent.cpp" />
@@ -160,6 +161,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArmorComponent.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAI.h" />
     <ClInclude Include="EnemyChaseComponent.h" />
