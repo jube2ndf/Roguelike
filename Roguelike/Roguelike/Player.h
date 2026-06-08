@@ -41,14 +41,14 @@ namespace Roguelike {
 
             player->AddComponent<GameEngine::TagComponent>("Player");
 
-            player->AddComponent<HealthComponent>(1000.f);
+            player->AddComponent<HealthComponent>(100.f);
 
             player->AddComponent<ArmorComponent>();
 
             auto AttackComponent = player->AddComponent<PlayerAttackComponent>();
 
-            AttackComponent->damage = 100.f;
-            AttackComponent->cooldown = 0.f;
+            AttackComponent->damage = 30.f;
+            AttackComponent->cooldown = 5.f;
             AttackComponent->distance = 50.f;
 
             auto AttackTrigger = player->AddComponent<AttackTriggerComponent>();

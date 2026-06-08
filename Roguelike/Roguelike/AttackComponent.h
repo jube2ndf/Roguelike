@@ -15,7 +15,7 @@ namespace Roguelike
 
         float cooldown = 1.f;
 
-        float timer = 0.f;
+        float timer = 10.f;
 
         void Update(float dt) override
         {

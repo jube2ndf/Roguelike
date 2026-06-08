@@ -45,8 +45,8 @@ namespace Roguelike {
             auto attack =
                 enemy->AddComponent<AttackComponent>();
 
-            attack->damage = 1.f;
-            attack->cooldown = 10000.f;
+            attack->damage = 25.f;
+            attack->cooldown = 10.f;
 
             enemy->AddComponent<EnemyAttackComponent>();
 
