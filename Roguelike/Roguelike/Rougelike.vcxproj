@@ -145,13 +145,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ArmorComponent.cpp" />
+    <ClCompile Include="AttackTriggerComponent.cpp" />
+    <ClCompile Include="CombatSystem.cpp" />
     <ClCompile Include="EnemyAI.cpp" />
+    <ClCompile Include="EnemyAttackComponent.cpp" />
     <ClCompile Include="EnemyChaseComponent.cpp" />
     <ClCompile Include="EnemyMovementComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerAttackComponent.cpp" />
     <ClCompile Include="PlayerMovementComponent.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
@@ -162,13 +166,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArmorComponent.h" />
+    <ClInclude Include="AttackComponent.h" />
+    <ClInclude Include="AttackTriggerComponent.h" />
+    <ClInclude Include="CombatAction.h" />
+    <ClInclude Include="CombatActionType.h" />
+    <ClInclude Include="CombatSystem.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAI.h" />
+    <ClInclude Include="EnemyAttackComponent.h" />
     <ClInclude Include="EnemyChaseComponent.h" />
     <ClInclude Include="EnemyMovementComponent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerAttackComponent.h" />
     <ClInclude Include="PlayerMovementComponent.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>

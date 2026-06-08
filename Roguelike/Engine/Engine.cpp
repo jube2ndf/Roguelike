@@ -72,18 +72,32 @@ void Engine::Run()
 
         while (accumulator >= FIXED_TIMESTEP)
         {
+            for (auto* layer : _layers)
+                layer->Update(FIXED_TIMESTEP);
             physics.Update(scene, FIXED_TIMESTEP);
             collision.Update(scene);
 
             accumulator -= FIXED_TIMESTEP;
-            
         }
         update.Update(scene, dt);
+
         render.Render(this->_window, scene);
+
+        for (auto iter : scene->GetDeadObjects()) {
+            collision.RemoveObject(iter);
+        }
+
+        scene->DestroyDead();
     }
 }
 
 GameEngine::SceneManager& Engine::GetSceneManager()
 {
     return this->_sceneManager;
+}
+
+void Engine::AddLayer(GameEngine::IGameLayer* layer)
+{
+    this->_layers.push_back(layer);
+    LOG_INFO("Engine", "Add: layer");
 }

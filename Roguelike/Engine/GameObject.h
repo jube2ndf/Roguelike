@@ -109,6 +109,10 @@ namespace GameEngine {
 		{
 			std::vector<T*> result;
 
+			if (this->_components.empty()) {
+				return result;
+			}
+
 			for (const auto& component : _components)
 			{
 				if (auto ptr = dynamic_cast<T*>(component.get()))

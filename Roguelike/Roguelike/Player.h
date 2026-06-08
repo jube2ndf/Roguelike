@@ -9,6 +9,11 @@
 #include <TextureManager.h>
 #include <SpriteRenderer.h>
 #include <TagComponent.h>
+#include "HealthComponent.h"
+#include "ArmorComponent.h"
+#include "PlayerAttackComponent.h"
+#include "AttackTriggerComponent.h"
+
 namespace Roguelike {
 	class Player
 	{
@@ -35,6 +40,18 @@ namespace Roguelike {
             collider->size = { 32,32 };
 
             player->AddComponent<GameEngine::TagComponent>("Player");
+
+            player->AddComponent<HealthComponent>(1000.f);
+
+            player->AddComponent<ArmorComponent>();
+
+            auto AttackComponent = player->AddComponent<PlayerAttackComponent>();
+
+            AttackComponent->damage = 100.f;
+            AttackComponent->cooldown = 0.f;
+            AttackComponent->distance = 50.f;
+
+            auto AttackTrigger = player->AddComponent<AttackTriggerComponent>();
 
             return player;
         }

@@ -18,6 +18,9 @@ namespace GameEngine {
 		GameObject* FindWithTag(std::string tagName);
 
         void DestroyAll();
+		void DestroyDead();
+
+		std::vector<GameObject*> GetDeadObjects();
 
 		std::vector<std::unique_ptr<GameObject>>& GetObjects();
 

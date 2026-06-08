@@ -22,6 +22,9 @@ namespace Roguelike {
 			currentHealth =
 				std::max<float>(0.f,
 					currentHealth - damage);
+			if (!this->IsAlive()) {
+				this->_owner->Destroy();
+			}
 		}
 
 		float GetMaxHealth() const

@@ -14,15 +14,13 @@ GameEngine::GameObject* GameEngine::Scene::CreateObject()
 
 void GameEngine::Scene::DestroyMarked()
 {
-    _objects.erase(
-        std::remove_if(
-            _objects.begin(),
-            _objects.end(),
-            [](const std::unique_ptr<GameObject>& obj)
-            {
-                return !obj->IsAlive();
-            }),
-        _objects.end());
+    for (auto& obj : _objects)
+    {
+        if (!obj->IsAlive())
+        {
+            obj->Destroy();
+        }
+    }
 }
 
 GameEngine::GameObject* GameEngine::Scene::FindWithTag(std::string tagName)
@@ -37,6 +35,35 @@ GameEngine::GameObject* GameEngine::Scene::FindWithTag(std::string tagName)
         }
     }
     return nullptr;
+}
+
+void GameEngine::Scene::DestroyDead()
+{
+    _objects.erase(
+        std::remove_if(
+            _objects.begin(), 
+            _objects.end(), 
+            [](const std::unique_ptr<GameObject>& obj) 
+            { 
+                return !obj->IsAlive();
+            }), 
+        _objects.end()
+    );
+}
+
+std::vector<GameEngine::GameObject*> GameEngine::Scene::GetDeadObjects()
+{
+    std::vector<GameObject*> result;
+
+    for (auto& obj : _objects)
+    {
+        if (!obj->IsAlive())
+        {
+            result.push_back(obj.get());
+        }
+    }
+
+    return result;
 }
 
 void GameEngine::Scene::DestroyAll()

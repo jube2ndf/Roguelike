@@ -32,6 +32,12 @@ void Roguelike::EnemyAI::OnTriggerStay(GameEngine::Collider* other)
     auto targetTr =
         target->GetComponent<GameEngine::TransformComponent>();
 
+    if (!targetTr)
+    {
+        rb->velocity = { 0.f, 0.f };
+        return;
+    }
+
     sf::Vector2f dir =
     {
         targetTr->GetWorldPosition().x - tr->GetWorldPosition().x,
@@ -40,6 +46,12 @@ void Roguelike::EnemyAI::OnTriggerStay(GameEngine::Collider* other)
 
     float len =
         std::sqrt(dir.x * dir.x + dir.y * dir.y);
+
+    if (len <= 35.f)
+    {
+        rb->velocity = { 0.f, 0.f };
+        return;
+    }
 
     if (len > 0.001f)
         dir /= len;

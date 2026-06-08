@@ -22,6 +22,12 @@
     <Filter Include="Файлы заголовков\LivingEntities">
       <UniqueIdentifier>{ad8e0ed5-6cea-47d9-9f3c-89fc2e121626}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Systems">
+      <UniqueIdentifier>{f1120ab1-de58-4cd8-80c5-96c45b85e6cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Systems\Attack">
+      <UniqueIdentifier>{d52e3609-a300-4092-ae15-6848ca4cba44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -52,6 +58,18 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="ArmorComponent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="CombatSystem.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyAttackComponent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackComponent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackTriggerComponent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -85,6 +103,27 @@
     </ClInclude>
     <ClInclude Include="ArmorComponent.h">
       <Filter>Файлы заголовков\LivingEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatAction.h">
+      <Filter>Файлы заголовков\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatActionType.h">
+      <Filter>Файлы заголовков\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatSystem.h">
+      <Filter>Файлы заголовков\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackComponent.h">
+      <Filter>Файлы заголовков\Systems\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAttackComponent.h">
+      <Filter>Файлы заголовков\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackComponent.h">
+      <Filter>Файлы заголовков\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackTriggerComponent.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

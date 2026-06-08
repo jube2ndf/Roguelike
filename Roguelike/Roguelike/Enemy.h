@@ -9,6 +9,10 @@
 #include <TextureManager.h>
 #include <SpriteRenderer.h>
 #include <TagComponent.h>
+#include "AttackComponent.h"
+#include "EnemyAttackComponent.h"
+#include "HealthComponent.h"
+#include "ArmorComponent.h"
 #include "EnemyAI.h"
 namespace Roguelike {
     class Enemy
@@ -37,6 +41,19 @@ namespace Roguelike {
             collider->size = { 32,32 };
 
             enemy->AddComponent<GameEngine::TagComponent>("Enemy");
+
+            auto attack =
+                enemy->AddComponent<AttackComponent>();
+
+            attack->damage = 1.f;
+            attack->cooldown = 10000.f;
+
+            enemy->AddComponent<EnemyAttackComponent>();
+
+            enemy->AddComponent<HealthComponent>(100.f);
+
+            enemy->AddComponent<ArmorComponent>();
+
 
             return enemy;
         }

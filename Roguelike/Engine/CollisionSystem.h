@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "TransformComponent.h"
+#include "Component.h"
 #include "Rigidbody.h"
 #include "BoxCollider.h"
 #include "CircleCollider.h"
@@ -61,6 +62,9 @@ namespace GameEngine {
 
             scene->DestroyMarked();
         }
+
+        void RemoveObject(GameObject* obj);
+
     private:
         std::unordered_set<CollisionPair, CollisionPairHash>
             _previousCollisions;
