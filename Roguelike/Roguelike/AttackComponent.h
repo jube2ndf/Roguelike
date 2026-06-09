@@ -1,6 +1,6 @@
 #pragma once
 #include <Component.h>
-
+#include <algorithm>
 namespace Roguelike
 {
     class AttackComponent : public GameEngine::Component
@@ -8,7 +8,9 @@ namespace Roguelike
     public:
         AttackComponent(GameEngine::GameObject* owner)
             : Component(owner)
-        {}
+        {
+            
+        }
         float distance = 20.f;
 
         float damage = 10.f;
@@ -19,8 +21,8 @@ namespace Roguelike
 
         void Update(float dt) override
         {
-            if (timer > 0.f)
-                timer -= dt;
+            if (timer >= 0.f)
+                timer = std::max<float>(0, timer - dt);
         }
 
         bool CanAttack() const

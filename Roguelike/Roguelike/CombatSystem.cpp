@@ -14,9 +14,10 @@ void Roguelike::CombatSystem::Update(float dt)
         switch (action.type)
         {
         case CombatActionType::Damage:
-            LOG_INFO("PlayerAttack",
+            LOG_INFO("Attack",
                 "source: " + std::to_string(reinterpret_cast<uintptr_t>(action.source)) +
-                "; target: " + std::to_string(reinterpret_cast<uintptr_t>(action.target)));
+                "; target: " + std::to_string(reinterpret_cast<uintptr_t>(action.target)) + "; value: " 
+                + std::to_string(action.value));
             ApplyDamage(action);
             break;
 

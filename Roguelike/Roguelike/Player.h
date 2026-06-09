@@ -48,8 +48,9 @@ namespace Roguelike {
             auto AttackComponent = player->AddComponent<PlayerAttackComponent>();
 
             AttackComponent->damage = 30.f;
-            AttackComponent->cooldown = 5.f;
-            AttackComponent->distance = 50.f;
+            AttackComponent->cooldown = 3.f;
+            AttackComponent->timer = 3.f;
+
 
             auto AttackTrigger = player->AddComponent<AttackTriggerComponent>();
 

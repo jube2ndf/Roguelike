@@ -9,8 +9,16 @@ void Roguelike::PlayerAttackComponent::Update(float dt)
     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
         return;
 
+    if (timer >= 0.f)
+    {
+        timer = std::max<float>(0, timer - dt);
+    }
     if (!this->CanAttack())
+    {
+        LOG_INFO("PressAttack",
+            "Cooldown wait: " + std::to_string(this->timer));
         return;
+    }
 
     for (auto* target : this->targets)
     {
