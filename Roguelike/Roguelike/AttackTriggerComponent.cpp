@@ -1,5 +1,6 @@
 #include "AttackTriggerComponent.h"
 #include "PlayerAttackComponent.h"
+#include "HealthComponent.h"
 #include <Logger.h>
 
 void Roguelike::AttackTriggerComponent::OnTriggerEnter(GameEngine::Collider* other)
@@ -14,7 +15,8 @@ void Roguelike::AttackTriggerComponent::OnTriggerEnter(GameEngine::Collider* oth
         return;
 
     
-    if(attack->targets.find(other->GetGameObject()) == attack->targets.end())
+    if(attack->targets.find(other->GetGameObject()) == attack->targets.end() 
+        && other->GetGameObject()->GetComponent<HealthComponent>())
         attack->targets.insert(other->GetGameObject());
 }
 

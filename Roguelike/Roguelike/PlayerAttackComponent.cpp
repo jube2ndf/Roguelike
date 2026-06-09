@@ -1,6 +1,7 @@
 #include "PlayerAttackComponent.h"
 #include <SFML/Window/Keyboard.hpp>
 #include "CombatAction.h"
+#include "HealthComponent.h"
 #include <EventBus.h>
 #include <Logger.h>
 
@@ -25,7 +26,9 @@ void Roguelike::PlayerAttackComponent::Update(float dt)
     {
         if (!target)
             continue;
-
+        if (!target->GetComponent<HealthComponent>()) {
+            continue;
+        }
         CombatAction action;
         action.type = CombatActionType::Damage;
         action.source = GetGameObject();
