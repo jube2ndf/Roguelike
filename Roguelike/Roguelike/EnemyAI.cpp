@@ -3,6 +3,8 @@
 #include <TransformComponent.h>
 #include <Rigidbody.h>
 #include <GameObject.h>
+#include "AttackComponent.h"
+#include <SpriteRenderer.h>
 
 void Roguelike::EnemyAI::OnTriggerEnter(GameEngine::Collider* other)
 {
@@ -19,7 +21,6 @@ void Roguelike::EnemyAI::OnTriggerStay(GameEngine::Collider* other)
 {
     auto rb = GetGameObject()->GetComponent<GameEngine::Rigidbody>();
     auto tr = GetGameObject()->GetComponent<GameEngine::TransformComponent>();
-
     if (!rb || !tr)
         return;
 
@@ -46,8 +47,26 @@ void Roguelike::EnemyAI::OnTriggerStay(GameEngine::Collider* other)
 
     float len =
         std::sqrt(dir.x * dir.x + dir.y * dir.y);
+    float stopLen = 0.f;
+    auto colliders = GetGameObject()->GetComponents<GameEngine::Collider>();
+    for (auto* iter : colliders) {
+        if (!iter->isTrigger &&
+                (
+                    stopLen < iter->GetSize().x / 2 ||
+                    stopLen < iter->GetSize().y / 2
+                )
+            )
+        {
+            stopLen = iter->GetSize().y < iter->GetSize().x ? iter->GetSize().x / 2: iter->GetSize().x / 2;
+        }
+    }
 
-    if (len <= 35.f)
+    auto attackComponent = GetGameObject()->GetComponent<AttackComponent>();
+    if (attackComponent) {
+        stopLen += attackComponent->distance;
+    }
+
+    if (len <= stopLen)
     {
         rb->velocity = { 0.f, 0.f };
         return;

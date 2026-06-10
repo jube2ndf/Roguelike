@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include "Component.h"
 #include "EngineAPI.h"
 namespace GameEngine {
