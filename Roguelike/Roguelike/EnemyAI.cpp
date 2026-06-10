@@ -1,77 +1,77 @@
 #include "EnemyAI.h"
-#include <TagComponent.h>
 #include <TransformComponent.h>
 #include <Rigidbody.h>
-#include <GameObject.h>
+#include <EventBus.h>
+#include "CombatAction.h"
 #include "AttackComponent.h"
-#include <SpriteRenderer.h>
-#include <math.h>
+#include "EnemyVision.h"
 
-void Roguelike::EnemyAI::OnTriggerEnter(GameEngine::Collider* other)
+
+void Roguelike::EnemyAI::Update(float dt)
 {
-    auto go = other->GetGameObject()->GetComponents<GameEngine::TagComponent>();
-    for (auto iter : go) {
-        if (iter->GetTag() == "Player")
-        {
-            target = other->GetGameObject();
-        }
+    auto* Ai = GetGameObject()->GetComponent<EnemyVision>();
+    if (Ai && Ai->target) {
+        target = Ai->target;
     }
-}
-
-void Roguelike::EnemyAI::OnTriggerStay(GameEngine::Collider* other)
-{
-    auto rb = GetGameObject()->GetComponent<GameEngine::Rigidbody>();
-    auto tr = GetGameObject()->GetComponent<GameEngine::TransformComponent>();
-    if (!rb || !tr)
+    else {
         return;
+    }
 
+    auto* rb = GetGameObject()->GetComponent<GameEngine::Rigidbody>();
     if (!target)
     {
         rb->velocity = { 0.f, 0.f };
         return;
     }
 
-    auto targetTr =
-        target->GetComponent<GameEngine::TransformComponent>();
+    auto* selfTr = GetGameObject()->GetComponent<GameEngine::TransformComponent>();
+    auto* targetTr = target->GetComponent<GameEngine::TransformComponent>();
+    auto* attack = GetGameObject()->GetComponent<AttackComponent>();
 
-    if (!targetTr)
-    {
-        rb->velocity = { 0.f, 0.f };
+    if (!selfTr || !targetTr || !rb || !attack)
         return;
-    }
 
-    sf::Vector2f dir =
+    sf::Vector2f toTarget =
     {
-        targetTr->GetWorldPosition().x - tr->GetWorldPosition().x,
-        targetTr->GetWorldPosition().y - tr->GetWorldPosition().y
+        targetTr->GetWorldPosition().x - selfTr->GetWorldPosition().x,
+        targetTr->GetWorldPosition().y - selfTr->GetWorldPosition().y
     };
 
-    float len =
-        std::sqrt(dir.x * dir.x + dir.y * dir.y);
-    float stopLen = sqrt(
-        powf(this->size.x, 2) + 
-        powf(this->size.y, 2)
-    );
-       
+    float dist = std::sqrt(toTarget.x * toTarget.x + toTarget.y * toTarget.y);
 
-    if (len <= stopLen)
+    if (dist > 0.0001f)
+        toTarget /= dist;
+
+    if (dist <= attack->distance)
     {
         rb->velocity = { 0.f, 0.f };
+
+        if (attack->CanAttack())
+        {
+            Attack();
+            attack->ResetCooldown();
+        }
+
         return;
     }
 
-    if (len > 0.001f)
-        dir /= len;
-
-    rb->velocity = dir * speed;
+    rb->velocity = toTarget * speed;
 }
 
-void Roguelike::EnemyAI::OnTriggerExit(GameEngine::Collider* other)
+void Roguelike::EnemyAI::Attack()
 {
-    auto go = other->GetGameObject();
+    auto* attack = GetGameObject()->GetComponent<AttackComponent>();
 
-    if (go == target)
-    {
-        target = nullptr;
-    }
+    if (!attack || !target)
+        return;
+
+    CombatAction action;
+    action.source = GetGameObject();
+    action.target = target;
+
+    action.value = attack->damage;
+    action.type = CombatActionType::Damage;
+
+    GameEngine::EventBus::Emit(action);
 }
+

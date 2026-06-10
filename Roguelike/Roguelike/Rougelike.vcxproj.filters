@@ -45,10 +45,7 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyChaseComponent.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyAI.cpp">
+    <ClCompile Include="EnemyVision.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="EnemyMovementComponent.cpp">
@@ -63,13 +60,13 @@
     <ClCompile Include="CombatSystem.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyAttackComponent.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerAttackComponent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="AttackTriggerComponent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyAI.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,10 +83,7 @@
     <ClInclude Include="Player.h">
       <Filter>Файлы заголовков\Player</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyChaseComponent.h">
-      <Filter>Файлы заголовков\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyAI.h">
+    <ClInclude Include="EnemyVision.h">
       <Filter>Файлы заголовков\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
@@ -116,14 +110,14 @@
     <ClInclude Include="AttackComponent.h">
       <Filter>Файлы заголовков\Systems\Attack</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyAttackComponent.h">
-      <Filter>Файлы заголовков\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerAttackComponent.h">
       <Filter>Файлы заголовков\Player</Filter>
     </ClInclude>
     <ClInclude Include="AttackTriggerComponent.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAI.h">
+      <Filter>Файлы заголовков\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

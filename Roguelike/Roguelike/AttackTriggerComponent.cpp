@@ -13,7 +13,6 @@ void Roguelike::AttackTriggerComponent::OnTriggerEnter(GameEngine::Collider* oth
 
     if (this->GetGameObject() == other->GetGameObject())
         return;
-
     
     if(attack->targets.find(other->GetGameObject()) == attack->targets.end() 
         && other->GetGameObject()->GetComponent<HealthComponent>())
