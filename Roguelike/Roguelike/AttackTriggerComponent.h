@@ -14,6 +14,7 @@ namespace Roguelike {
             :BoxCollider(owner) 
         {
             this->isTrigger = true;
+            this->size = { 100.f, 100.f };
         }
 
         void OnTriggerEnter(GameEngine::Collider* other) override;

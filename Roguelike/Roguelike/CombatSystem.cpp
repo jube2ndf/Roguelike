@@ -49,7 +49,7 @@ void Roguelike::CombatSystem::ApplyDamage(
         action.target
         ->GetComponent<ArmorComponent>();
 
-    if (!armor) {
+    if (armor) {
 
         hp->TakeDamage(action.value * (100 / (100 + armor->GetArmor())));
     }

@@ -53,8 +53,8 @@ namespace Roguelike {
 
             enemy->AddComponent<HealthComponent>(100.f);
 
-            enemy->AddComponent<ArmorComponent>();
-
+            auto armor = enemy->AddComponent<ArmorComponent>();
+            armor->baseArmor = 10;
 
             return enemy;
         }

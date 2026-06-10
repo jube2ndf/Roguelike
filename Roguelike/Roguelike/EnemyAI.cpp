@@ -5,6 +5,7 @@
 #include <GameObject.h>
 #include "AttackComponent.h"
 #include <SpriteRenderer.h>
+#include <math.h>
 
 void Roguelike::EnemyAI::OnTriggerEnter(GameEngine::Collider* other)
 {
@@ -47,24 +48,11 @@ void Roguelike::EnemyAI::OnTriggerStay(GameEngine::Collider* other)
 
     float len =
         std::sqrt(dir.x * dir.x + dir.y * dir.y);
-    float stopLen = 0.f;
-    auto colliders = GetGameObject()->GetComponents<GameEngine::Collider>();
-    for (auto* iter : colliders) {
-        if (!iter->isTrigger &&
-                (
-                    stopLen < iter->GetSize().x / 2 ||
-                    stopLen < iter->GetSize().y / 2
-                )
-            )
-        {
-            stopLen = iter->GetSize().y < iter->GetSize().x ? iter->GetSize().x / 2: iter->GetSize().x / 2;
-        }
-    }
-
-    auto attackComponent = GetGameObject()->GetComponent<AttackComponent>();
-    if (attackComponent) {
-        stopLen += attackComponent->distance;
-    }
+    float stopLen = sqrt(
+        powf(this->size.x, 2) + 
+        powf(this->size.y, 2)
+    );
+       
 
     if (len <= stopLen)
     {

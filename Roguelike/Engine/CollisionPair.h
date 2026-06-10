@@ -10,8 +10,7 @@ namespace GameEngine {
         bool operator==(const CollisionPair& other) const
         {
             return
-                (a == other.a && b == other.b) ||
-                (a == other.b && b == other.a);
+                (a == other.a && b == other.b);
         }
     };
 }

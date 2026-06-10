@@ -17,8 +17,6 @@ void Roguelike::PlayerAttackComponent::Update(float dt)
 
     if (!this->CanAttack())
     {
-        LOG_INFO("PressAttack",
-            "Cooldown wait: " + std::to_string(this->timer));
         return;
     }
 

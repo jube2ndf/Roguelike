@@ -43,7 +43,8 @@ namespace Roguelike {
 
             player->AddComponent<HealthComponent>(100.f);
 
-            player->AddComponent<ArmorComponent>();
+            auto armor = player->AddComponent<ArmorComponent>();
+            armor->baseArmor = 10;
 
             auto AttackComponent = player->AddComponent<PlayerAttackComponent>();
 
