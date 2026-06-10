@@ -1,5 +1,6 @@
 #include "CombatSystem.h"
 #include "HealthComponent.h"
+#include "ArmorComponent.h"
 #include <Logger.h>
 
 void Roguelike::CombatSystem::QueueAction(const CombatAction& action)
@@ -44,7 +45,16 @@ void Roguelike::CombatSystem::ApplyDamage(
     if (!hp)
         return;
 
-    hp->TakeDamage(action.value);
+    auto armor =
+        action.target
+        ->GetComponent<ArmorComponent>();
+
+    if (!armor) {
+
+        hp->TakeDamage(action.value * (100 / (100 + armor->GetArmor())));
+    }
+    else
+        hp->TakeDamage(action.value);
 }
 
 void Roguelike::CombatSystem::ApplyHeal(
