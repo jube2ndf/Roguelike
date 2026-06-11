@@ -136,42 +136,33 @@ namespace GameEngine {
 
         void CallListenersEnter(Collider* self, Collider* other)
         {
-            auto obj = self->GetGameObject();
+            auto listener =
+                dynamic_cast<ITriggerListener*>(self);
 
-            for (auto& comp : obj->GetComponents<Component>())
+            if (listener)
             {
-                auto listener =
-                    dynamic_cast<ITriggerListener*>(comp);
-
-                if (listener)
-                    listener->OnTriggerEnter(other);
+                listener->OnTriggerEnter(other);
             }
         }
         void CallListenersStay(Collider* self, Collider* other)
         {
-            auto obj = self->GetGameObject();
+            auto listener =
+                dynamic_cast<ITriggerListener*>(self);
 
-            for (auto& comp : obj->GetComponents<Component>())
+            if (listener)
             {
-                auto listener =
-                    dynamic_cast<ITriggerListener*>(comp);
-
-                if (listener)
-                    listener->OnTriggerStay(other);
+                listener->OnTriggerStay(other);
             }
         }
 
         void CallListenersExit(Collider* self, Collider* other)
         {
-            auto obj = self->GetGameObject();
+            auto listener =
+                dynamic_cast<ITriggerListener*>(self);
 
-            for (auto& comp : obj->GetComponents<Component>())
+            if (listener)
             {
-                auto listener =
-                    dynamic_cast<ITriggerListener*>(comp);
-
-                if (listener)
-                    listener->OnTriggerExit(other);
+                listener->OnTriggerExit(other);
             }
         }
 

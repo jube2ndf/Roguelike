@@ -11,7 +11,6 @@ namespace Roguelike {
 			Component(owner) {
 		}
 		float speed = 120.f;
-		GameEngine::GameObject* target = nullptr;
 
 		void Update(float dt) override;
 	private:

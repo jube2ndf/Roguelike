@@ -10,25 +10,21 @@
 void Roguelike::EnemyAI::Update(float dt)
 {
     auto* Ai = GetGameObject()->GetComponent<EnemyVision>();
-    if (Ai && Ai->target) {
-        target = Ai->target;
-    }
-    else {
-        return;
-    }
-
     auto* rb = GetGameObject()->GetComponent<GameEngine::Rigidbody>();
-    if (!target)
-    {
+
+    if (!rb || !Ai)
+        return;
+    
+    if (Ai->target == NULL) {
         rb->velocity = { 0.f, 0.f };
         return;
     }
 
     auto* selfTr = GetGameObject()->GetComponent<GameEngine::TransformComponent>();
-    auto* targetTr = target->GetComponent<GameEngine::TransformComponent>();
+    auto* targetTr = Ai->target->GetComponent<GameEngine::TransformComponent>();
     auto* attack = GetGameObject()->GetComponent<AttackComponent>();
 
-    if (!selfTr || !targetTr || !rb || !attack)
+    if (!selfTr || !targetTr || !attack)
         return;
 
     sf::Vector2f toTarget =
@@ -42,7 +38,12 @@ void Roguelike::EnemyAI::Update(float dt)
     if (dist > 0.0001f)
         toTarget /= dist;
 
-    if (dist <= attack->distance)
+    float stopDistance =
+        attack->distance +
+        GetGameObject()->GetComponent<GameEngine::BoxCollider>()->GetHalfSize().x +
+        Ai->target->GetComponent<GameEngine::BoxCollider>()->GetHalfSize().x;
+
+    if (dist < stopDistance)
     {
         rb->velocity = { 0.f, 0.f };
 
@@ -61,13 +62,13 @@ void Roguelike::EnemyAI::Update(float dt)
 void Roguelike::EnemyAI::Attack()
 {
     auto* attack = GetGameObject()->GetComponent<AttackComponent>();
-
-    if (!attack || !target)
+    auto* Ai = GetGameObject()->GetComponent<EnemyVision>();
+    if (!attack || !Ai || !Ai->target)
         return;
 
     CombatAction action;
     action.source = GetGameObject();
-    action.target = target;
+    action.target = Ai->target;
 
     action.value = attack->damage;
     action.type = CombatActionType::Damage;
