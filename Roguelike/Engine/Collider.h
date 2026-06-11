@@ -10,6 +10,16 @@ namespace GameEngine {
         static constexpr bool Unique = false;
         static constexpr bool Required = false;
 
+        uint32_t layer = 1;
+        uint32_t mask = 0xFFFFFFFF;
+
+        bool CanInteract(const Collider* other) const
+        {
+            return
+                (mask & other->layer) &&
+                (other->mask & layer);
+        }
+
         Collider(GameObject* owner) : Component(owner) {}
         virtual ~Collider() = default;
 

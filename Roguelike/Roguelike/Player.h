@@ -13,6 +13,7 @@
 #include "ArmorComponent.h"
 #include "PlayerAttackComponent.h"
 #include "EntityVision.h"
+#include "CollisionLayers.h"
 
 namespace Roguelike {
 	class Player
@@ -34,7 +35,11 @@ namespace Roguelike {
 
             auto collider =
                 player->AddComponent<GameEngine::BoxCollider>();
-
+            collider->layer = CollisionLayers::PlayerBody;
+            collider->mask =
+                CollisionLayers::EnemyBody |
+                CollisionLayers::Vision |
+                CollisionLayers::Attack;
             auto rend = player->AddComponent<GameEngine::SpriteRenderer>(GameEngine::TextureManager::load("./Resources/Textures/Player.png"));
 
             collider->size = { 32,32 };
@@ -54,6 +59,9 @@ namespace Roguelike {
 
 
             auto entityVision = player->AddComponent<EntityVision>();
+            entityVision->layer = CollisionLayers::Vision;
+            entityVision->mask = 
+                CollisionLayers::EnemyBody;
 
             return player;
         }

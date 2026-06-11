@@ -12,14 +12,11 @@ void Roguelike::EntityVision::OnTriggerEnter(GameEngine::Collider* other)
 {
     auto go = other->GetGameObject()->GetComponents<GameEngine::TagComponent>();
     for (auto iter : go) {
-        if (iter->GetTag() == "Player")
-        {
-            if (this->GetGameObject() == other->GetGameObject())
-                return;
+        if (this->GetGameObject() == other->GetGameObject())
+            return;
 
-            if (targets.find(other->GetGameObject()) == targets.end())
-                targets.insert(other->GetGameObject());
-        }
+        if (targets.find(other->GetGameObject()) == targets.end())
+            targets.insert(other->GetGameObject());
     }
 }
 

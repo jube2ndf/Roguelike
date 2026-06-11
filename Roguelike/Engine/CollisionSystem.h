@@ -35,7 +35,13 @@ namespace GameEngine {
             {
                 for (size_t j = 0; j < colliders.size(); j++)
                 {
-                    if (i != j && CheckCollision(colliders[i], colliders[j], manifold))
+                    if (i == j)
+                        continue;
+
+                    if (!colliders[i]->CanInteract(colliders[j]))
+                        continue;
+
+                    if (CheckCollision(colliders[i], colliders[j], manifold))
                     {
                         if (colliders[i]->isTrigger || colliders[j]->isTrigger)
                         {

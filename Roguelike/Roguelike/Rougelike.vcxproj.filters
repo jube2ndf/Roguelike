@@ -113,5 +113,8 @@
     <ClInclude Include="EntityVision.h">
       <Filter>Файлы заголовков\LivingEntities</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionLayers.h">
+      <Filter>Файлы заголовков\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

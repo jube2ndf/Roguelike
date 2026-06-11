@@ -18,6 +18,5 @@ namespace Roguelike {
 
 		void Update(float dt) override;
 
-		std::unordered_set<GameEngine::GameObject*> targets;
 	};
 }

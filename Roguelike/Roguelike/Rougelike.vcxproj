@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="ArmorComponent.h" />
     <ClInclude Include="AttackComponent.h" />
+    <ClInclude Include="CollisionLayers.h" />
     <ClInclude Include="CombatAction.h" />
     <ClInclude Include="CombatActionType.h" />
     <ClInclude Include="CombatSystem.h" />

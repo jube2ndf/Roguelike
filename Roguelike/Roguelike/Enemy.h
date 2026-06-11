@@ -13,6 +13,7 @@
 #include "AttackComponent.h"
 #include "HealthComponent.h"
 #include "ArmorComponent.h"
+#include "CollisionLayers.h"
 #include "EnemyAI.h"
 namespace Roguelike {
     class Enemy
@@ -32,9 +33,17 @@ namespace Roguelike {
 
             auto collider =
                 enemy->AddComponent<GameEngine::BoxCollider>();
+            collider->layer = CollisionLayers::EnemyBody;
+            collider->mask =
+                CollisionLayers::PlayerBody |
+                CollisionLayers::Vision |
+                CollisionLayers::Attack;
 
             auto enemyAI =
                 enemy->AddComponent<EntityVision>();
+            enemyAI->layer = CollisionLayers::Vision;
+            enemyAI->mask =
+                CollisionLayers::PlayerBody;
 
             auto rend = enemy->AddComponent<GameEngine::SpriteRenderer>(GameEngine::TextureManager::load("./Resources/Textures/Player.png"));
 

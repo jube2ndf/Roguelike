@@ -34,7 +34,7 @@ void Roguelike::PlayerAttackComponent::Update(float dt)
     }
     float closestDist = std::numeric_limits<float>::max();
     GameEngine::GameObject* closest = nullptr;
-    for (auto* obj : this->targets)
+    for (auto* obj : vision->targets)
     {
         auto* tr =
             obj->GetComponent<GameEngine::TransformComponent>();
