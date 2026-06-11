@@ -37,6 +37,7 @@ namespace Roguelike {
                 player->AddComponent<GameEngine::BoxCollider>();
             collider->layer = CollisionLayers::PlayerBody;
             collider->mask =
+                CollisionLayers::GameObject |
                 CollisionLayers::EnemyBody |
                 CollisionLayers::Vision |
                 CollisionLayers::Attack;
@@ -59,6 +60,7 @@ namespace Roguelike {
 
 
             auto entityVision = player->AddComponent<EntityVision>();
+            entityVision->size = { 50, 50 };
             entityVision->layer = CollisionLayers::Vision;
             entityVision->mask = 
                 CollisionLayers::EnemyBody;

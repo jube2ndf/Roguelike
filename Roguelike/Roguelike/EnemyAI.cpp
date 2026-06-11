@@ -76,8 +76,8 @@ void Roguelike::EnemyAI::Update(float dt)
 
     float stopDistance =
         attack->distance +
-        GetGameObject()->GetComponent<GameEngine::BoxCollider>()->GetHalfSize().x +
-        closest->GetComponent<GameEngine::BoxCollider>()->GetHalfSize().x;
+        GetGameObject()->GetComponent<GameEngine::BoxCollider>()->GetRadius() +
+        closest->GetComponent<GameEngine::BoxCollider>()->GetRadius();
 
     if (dist < stopDistance)
     {

@@ -35,6 +35,7 @@ namespace Roguelike {
                 enemy->AddComponent<GameEngine::BoxCollider>();
             collider->layer = CollisionLayers::EnemyBody;
             collider->mask =
+                CollisionLayers::GameObject |
                 CollisionLayers::PlayerBody |
                 CollisionLayers::Vision |
                 CollisionLayers::Attack;

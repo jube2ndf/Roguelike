@@ -24,6 +24,7 @@ namespace GameEngine {
         virtual ~Collider() = default;
 
         virtual sf::Vector2f GetSize() const = 0;
+        virtual float GetRadius() { return 0; };
 
         sf::Vector2f GetWorldCenter() const {
             auto transform = this->GetGameObject()->GetComponent<TransformComponent>();

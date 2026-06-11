@@ -17,6 +17,15 @@ namespace GameEngine {
             return size;
         }
 
+        float GetRadius() override
+        {
+            auto half = GetHalfSize();
+
+            return std::sqrt(
+                half.x * half.x +
+                half.y * half.y);
+        }
+
         sf::Vector2f GetHalfSize() const {
             return { size.x / 2.f, size.y / 2.f };
         }
