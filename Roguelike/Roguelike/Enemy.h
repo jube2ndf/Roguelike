@@ -9,7 +9,7 @@
 #include <TextureManager.h>
 #include <SpriteRenderer.h>
 #include <TagComponent.h>
-#include "EnemyVision.h"
+#include "EntityVision.h"
 #include "AttackComponent.h"
 #include "HealthComponent.h"
 #include "ArmorComponent.h"
@@ -34,7 +34,7 @@ namespace Roguelike {
                 enemy->AddComponent<GameEngine::BoxCollider>();
 
             auto enemyAI =
-                enemy->AddComponent<EnemyVision>();
+                enemy->AddComponent<EntityVision>();
 
             auto rend = enemy->AddComponent<GameEngine::SpriteRenderer>(GameEngine::TextureManager::load("./Resources/Textures/Player.png"));
 

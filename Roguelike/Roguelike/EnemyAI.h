@@ -14,6 +14,7 @@ namespace Roguelike {
 
 		void Update(float dt) override;
 	private:
+		GameEngine::GameObject* closest = nullptr;
 		void Attack();
 	};
 }

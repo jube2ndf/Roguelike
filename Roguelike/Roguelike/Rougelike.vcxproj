@@ -145,10 +145,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ArmorComponent.cpp" />
-    <ClCompile Include="AttackTriggerComponent.cpp" />
     <ClCompile Include="CombatSystem.cpp" />
     <ClCompile Include="EnemyAI.cpp" />
-    <ClCompile Include="EnemyVision.cpp" />
+    <ClCompile Include="EntityVision.cpp" />
     <ClCompile Include="EnemyMovementComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
@@ -166,13 +165,12 @@
   <ItemGroup>
     <ClInclude Include="ArmorComponent.h" />
     <ClInclude Include="AttackComponent.h" />
-    <ClInclude Include="AttackTriggerComponent.h" />
     <ClInclude Include="CombatAction.h" />
     <ClInclude Include="CombatActionType.h" />
     <ClInclude Include="CombatSystem.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAI.h" />
-    <ClInclude Include="EnemyVision.h" />
+    <ClInclude Include="EntityVision.h" />
     <ClInclude Include="EnemyMovementComponent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HealthComponent.h" />

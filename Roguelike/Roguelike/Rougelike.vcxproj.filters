@@ -45,7 +45,7 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyVision.cpp">
+    <ClCompile Include="EntityVision.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="EnemyMovementComponent.cpp">
@@ -61,9 +61,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAttackComponent.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="AttackTriggerComponent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="EnemyAI.cpp">
@@ -82,9 +79,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Файлы заголовков\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyVision.h">
-      <Filter>Файлы заголовков\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Файлы заголовков\Enemy</Filter>
@@ -113,11 +107,11 @@
     <ClInclude Include="PlayerAttackComponent.h">
       <Filter>Файлы заголовков\Player</Filter>
     </ClInclude>
-    <ClInclude Include="AttackTriggerComponent.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyAI.h">
       <Filter>Файлы заголовков\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityVision.h">
+      <Filter>Файлы заголовков\LivingEntities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -12,7 +12,7 @@
 #include "HealthComponent.h"
 #include "ArmorComponent.h"
 #include "PlayerAttackComponent.h"
-#include "AttackTriggerComponent.h"
+#include "EntityVision.h"
 
 namespace Roguelike {
 	class Player
@@ -53,7 +53,7 @@ namespace Roguelike {
             AttackComponent->timer = 3.f;
 
 
-            auto AttackTrigger = player->AddComponent<AttackTriggerComponent>();
+            auto entityVision = player->AddComponent<EntityVision>();
 
             return player;
         }

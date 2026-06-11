@@ -4,29 +4,65 @@
 #include <EventBus.h>
 #include "CombatAction.h"
 #include "AttackComponent.h"
-#include "EnemyVision.h"
+#include "EntityVision.h"
+#include <unordered_set>
 
 
 void Roguelike::EnemyAI::Update(float dt)
 {
-    auto* Ai = GetGameObject()->GetComponent<EnemyVision>();
+    auto* Ai = GetGameObject()->GetComponent<EntityVision>();
     auto* rb = GetGameObject()->GetComponent<GameEngine::Rigidbody>();
 
     if (!rb || !Ai)
         return;
     
-    if (Ai->target == NULL) {
+    if (Ai->targets.size() == 0) {
         rb->velocity = { 0.f, 0.f };
         return;
     }
 
     auto* selfTr = GetGameObject()->GetComponent<GameEngine::TransformComponent>();
-    auto* targetTr = Ai->target->GetComponent<GameEngine::TransformComponent>();
     auto* attack = GetGameObject()->GetComponent<AttackComponent>();
 
-    if (!selfTr || !targetTr || !attack)
+    if (!selfTr || !attack)
         return;
 
+    
+    float closestDist = std::numeric_limits<float>::max();
+
+    for (auto* obj : Ai->targets)
+    {
+        auto* tr =
+            obj->GetComponent<GameEngine::TransformComponent>();
+
+        if (!tr)
+            continue;
+
+        sf::Vector2f d =
+        {
+            tr->GetWorldPosition().x - selfTr->GetWorldPosition().x,
+            tr->GetWorldPosition().y - selfTr->GetWorldPosition().y
+        };
+
+        float dist = d.x * d.x + d.y * d.y;
+
+        if (dist < closestDist)
+        {
+            closestDist = dist;
+            closest = obj;
+        }
+    }
+
+    if (!closest)
+    {
+        rb->velocity = { 0.f, 0.f };
+        return;
+    }
+    auto* targetTr = closest->GetComponent<GameEngine::TransformComponent>();
+    if (!targetTr) {
+        rb->velocity = { 0.f, 0.f };
+        return;
+    }
     sf::Vector2f toTarget =
     {
         targetTr->GetWorldPosition().x - selfTr->GetWorldPosition().x,
@@ -41,7 +77,7 @@ void Roguelike::EnemyAI::Update(float dt)
     float stopDistance =
         attack->distance +
         GetGameObject()->GetComponent<GameEngine::BoxCollider>()->GetHalfSize().x +
-        Ai->target->GetComponent<GameEngine::BoxCollider>()->GetHalfSize().x;
+        closest->GetComponent<GameEngine::BoxCollider>()->GetHalfSize().x;
 
     if (dist < stopDistance)
     {
@@ -62,13 +98,13 @@ void Roguelike::EnemyAI::Update(float dt)
 void Roguelike::EnemyAI::Attack()
 {
     auto* attack = GetGameObject()->GetComponent<AttackComponent>();
-    auto* Ai = GetGameObject()->GetComponent<EnemyVision>();
-    if (!attack || !Ai || !Ai->target)
+    auto* Ai = GetGameObject()->GetComponent<EntityVision>();
+    if (!attack || !Ai || !closest)
         return;
 
     CombatAction action;
     action.source = GetGameObject();
-    action.target = Ai->target;
+    action.target = closest;
 
     action.value = attack->damage;
     action.type = CombatActionType::Damage;
