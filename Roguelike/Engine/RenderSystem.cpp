@@ -1,73 +1,74 @@
 #include "pch.h"
 #include "RenderSystem.h"
 #include "Collider.h"
-#include "Scene.h"
 #include "GameObject.h"
-#include "TransformComponent.h"
+#include "Scene.h"
 #include "ShapeRenderer.h"
 #include "SpriteRenderer.h"
+#include "TransformComponent.h"
 
-void GameEngine::RenderSystem::Render(sf::RenderWindow& window, Scene* scene)
-{
-    window.clear();
-    window.setView(scene->GetCamera().GetView());
-    for (auto& object : scene->GetObjects())
-    {
-        auto transform =
-            object->GetComponent<TransformComponent>();
+void GameEngine::RenderSystem::Render(sf::RenderWindow &window, Scene *scene) {
+  window.clear();
+  window.setView(scene->GetCamera().GetView());
 
-        if (!transform)
-            continue;
+  auto center = window.getView().getCenter();
+  auto size = window.getView().getSize();
 
-        // ===== SHAPES =====
-        if (auto shapeRenderer =
-            object->GetComponent<ShapeRenderer>())
-        {
-            shapeRenderer->shape->setPosition(
-                transform->GetWorldPosition());
+  float margin = 50.f;
 
-            shapeRenderer->shape->setRotation(
-                sf::degrees(transform->GetWorldRotation()));
+  sf::FloatRect viewRect(
+      {center.x - size.x * 0.5f - margin, center.y - size.y * 0.5f - margin},
+      {size.x + margin * 2.f, size.y + margin * 2.f});
 
-            shapeRenderer->shape->setScale(
-                transform->GetWorldScale());
+  for (auto &object : scene->GetObjects()) {
+    if (auto spriteRenderer = object->GetComponent<SpriteRenderer>()) {
+      if (!viewRect.findIntersection(spriteRenderer->GetSprite().getGlobalBounds()))
+        continue;
+    }
+    auto transform = object->GetComponent<TransformComponent>();
 
-            window.draw(*shapeRenderer->shape);
-        }
+    if (!transform)
+      continue;
 
-        // ===== SPRITES =====
-        if (auto spriteRenderer =
-            object->GetComponent<SpriteRenderer>())
-        {
-            auto& sprite = spriteRenderer->GetSprite();
+    // ===== SHAPES =====
+    if (auto shapeRenderer = object->GetComponent<ShapeRenderer>()) {
+      shapeRenderer->shape->setPosition(transform->GetWorldPosition());
 
-            sprite.setPosition(transform->GetWorldPosition());
+      shapeRenderer->shape->setRotation(
+          sf::degrees(transform->GetWorldRotation()));
 
-            sprite.setRotation(sf::degrees(transform->GetWorldRotation()));
+      shapeRenderer->shape->setScale(transform->GetWorldScale());
 
-            sf::Vector2f worldSize;
-
-            // ===== 1. ПЫТАЕМСЯ БРАТЬ РАЗМЕР ИЗ COLLIDER =====
-            if (auto collider = object->GetComponent<Collider>())
-            {
-                worldSize = collider->GetSize();
-            }
-            // ===== 2. ИНАЧЕ FALLBACK НА TRANSFORM =====
-            else
-            {
-                worldSize = transform->GetWorldScale();
-            }
-
-            auto texSize = sprite.getTexture().getSize();
-
-            sprite.setScale(
-                { worldSize.x / static_cast<float>(texSize.x),
-                worldSize.y / static_cast<float>(texSize.y) }
-            );
-
-            window.draw(sprite);
-        }
+      window.draw(*shapeRenderer->shape);
     }
 
-    window.display();
+    // ===== SPRITES =====
+    if (auto spriteRenderer = object->GetComponent<SpriteRenderer>()) {
+      auto &sprite = spriteRenderer->GetSprite();
+
+      sprite.setPosition(transform->GetWorldPosition());
+
+      sprite.setRotation(sf::degrees(transform->GetWorldRotation()));
+
+      sf::Vector2f worldSize;
+
+      // ===== 1. ПЫТАЕМСЯ БРАТЬ РАЗМЕР ИЗ COLLIDER =====
+      if (auto collider = object->GetComponent<Collider>()) {
+        worldSize = collider->GetSize();
+      }
+      // ===== 2. ИНАЧЕ FALLBACK НА TRANSFORM =====
+      else {
+        worldSize = transform->GetWorldScale();
+      }
+
+      auto texSize = sprite.getTexture().getSize();
+
+      sprite.setScale({worldSize.x / static_cast<float>(texSize.x),
+                       worldSize.y / static_cast<float>(texSize.y)});
+
+      window.draw(sprite);
+    }
+  }
+
+  window.display();
 }

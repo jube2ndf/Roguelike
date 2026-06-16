@@ -5,7 +5,8 @@
 #include <SFML/System/Vector2.hpp>
 
 GameEngine::Camera::Camera() {
-  _view.setSize({1280.f, 720.f});
+  //_view.setSize({1280.f, 720.f});
+  _view.setSize({320, 160.f});
   _view.setCenter({640.f, 360.f});
   _target = nullptr;
 }
@@ -34,6 +35,6 @@ void GameEngine::Camera::Update() {
 
   if (tr == nullptr)
     return;
-
+  _view.setCenter(tr->GetWorldPosition());
   SetPosition(tr->GetWorldPosition());
 }

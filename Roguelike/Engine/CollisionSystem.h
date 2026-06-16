@@ -33,11 +33,8 @@ namespace GameEngine {
             CollisionManifold manifold;
             for (size_t i = 0; i < colliders.size(); i++)
             {
-                for (size_t j = 0; j < colliders.size(); j++)
+                for (size_t j = i + 1; j < colliders.size(); j++)
                 {
-                    if (i == j)
-                        continue;
-
                     if (!colliders[i]->CanInteract(colliders[j]))
                         continue;
 
