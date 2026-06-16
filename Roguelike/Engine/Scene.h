@@ -2,6 +2,9 @@
 #include <vector>
 #include <memory>
 #include "GameObject.h"
+#include "Camera.h"
+
+
 namespace GameEngine {
 	class ENGINE_API Scene
 	{
@@ -24,8 +27,10 @@ namespace GameEngine {
 
 		std::vector<std::unique_ptr<GameObject>>& GetObjects();
 
-		
-	private:
+		Camera &GetCamera() { return _camera; }
+
+    private:
+        Camera _camera;
 		std::vector <std::unique_ptr< GameObject >> _objects;
 	};
 }

@@ -10,7 +10,7 @@
 void GameEngine::RenderSystem::Render(sf::RenderWindow& window, Scene* scene)
 {
     window.clear();
-
+    window.setView(scene->GetCamera().GetView());
     for (auto& object : scene->GetObjects())
     {
         auto transform =

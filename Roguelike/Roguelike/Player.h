@@ -64,7 +64,7 @@ namespace Roguelike {
             entityVision->layer = CollisionLayers::Vision;
             entityVision->mask = 
                 CollisionLayers::EnemyBody;
-
+            scene.GetCamera().Follow(player);
             return player;
         }
 	};

@@ -76,7 +76,7 @@ void Engine::Run()
                 layer->Update(FIXED_TIMESTEP);
             physics.Update(scene, FIXED_TIMESTEP);
             collision.Update(scene);
-
+            scene->GetCamera().Update();
             accumulator -= FIXED_TIMESTEP;
         }
         update.Update(scene, dt);
