@@ -36,7 +36,7 @@ void Roguelike::PlayerAttackComponent::Update(float dt)
     GameEngine::GameObject* closest = nullptr;
     for (auto* obj : vision->targets)
     {
-        auto* tr =
+        auto * tr =
             obj->GetComponent<GameEngine::TransformComponent>();
 
         if (!tr)
