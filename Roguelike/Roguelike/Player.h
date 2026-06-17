@@ -22,6 +22,7 @@ namespace Roguelike {
         static GameEngine::GameObject* Create(GameEngine::Scene& scene, sf::Vector2f pos)
         {
             auto player = scene.CreateObject();
+            player->persistentObjects = true;
 
             player->AddComponent<PlayerMovementComponent>();
 

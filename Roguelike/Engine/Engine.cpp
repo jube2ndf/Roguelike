@@ -45,11 +45,7 @@ void Engine::Run()
     sf::Clock clock;
     float accumulator = 0.f;
 
-    GameEngine::RenderSystem render;
-    GameEngine::PhysicsSystem physics;
-    GameEngine::CollisionSystem collision;
-    GameEngine::UpdateSystem update;
-
+    
     while (this->_window.isOpen())
     {
         float dt = clock.restart().asSeconds();
@@ -74,19 +70,18 @@ void Engine::Run()
         {
             for (auto* layer : _layers)
                 layer->Update(FIXED_TIMESTEP);
-            physics.Update(scene, FIXED_TIMESTEP);
-            collision.Update(scene);
+            this->physics.Update(scene, FIXED_TIMESTEP);
+            this->collision.Update(scene);
             scene->GetCamera().Update();
             accumulator -= FIXED_TIMESTEP;
         }
-        update.Update(scene, dt);
+        this->update.Update(scene, dt);
 
-        render.Render(this->_window, scene);
+        this->render.Render(this->_window, scene);
 
         for (auto iter : scene->GetDeadObjects()) {
-            collision.RemoveObject(iter);
+            this->collision.RemoveObject(iter);
         }
-
         scene->DestroyDead();
     }
 }
@@ -100,4 +95,9 @@ void Engine::AddLayer(GameEngine::IGameLayer* layer)
 {
     this->_layers.push_back(layer);
     LOG_INFO("Engine", "Add: layer");
+}
+
+void Engine::ClearCollision()
+{
+    this->collision.Clear();
 }

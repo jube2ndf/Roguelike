@@ -75,3 +75,14 @@ std::vector<std::unique_ptr<GameEngine::GameObject>>& GameEngine::Scene::GetObje
 {
     return _objects;
 }
+
+void GameEngine::Scene::ClearScene()
+{
+    for (auto& obj : _objects)
+    {
+        if (!obj->persistentObjects)
+        {
+            obj->Destroy();
+        }
+    }
+}

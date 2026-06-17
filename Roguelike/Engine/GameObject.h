@@ -131,6 +131,8 @@ namespace GameEngine {
 			_alive = false;
 		}
 
+		bool persistentObjects = false;
+
 	protected:
 		std::vector<std::unique_ptr<Component>> _components;
 		bool _alive = true;

@@ -16,6 +16,5 @@ namespace Roguelike {
 		Engine* _engine;
 		void CreateLevel1();
 		std::unique_ptr<CombatSystem> _combat;
-
 	};
 }

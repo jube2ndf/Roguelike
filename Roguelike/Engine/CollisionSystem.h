@@ -64,6 +64,11 @@ namespace GameEngine {
 
         void RemoveObject(GameObject* obj);
 
+        void Clear()
+        {
+            _previousCollisions.clear();
+        }
+
     private:
         std::unordered_set<CollisionPair, CollisionPairHash>
             _previousCollisions;
@@ -172,8 +177,15 @@ namespace GameEngine {
         void ProcessEvents(
             const std::unordered_set<CollisionPair, CollisionPairHash>& current)
         {
+            auto valid = [](Collider* c) {
+                return c &&
+                       c->GetGameObject() != nullptr &&
+                       c->GetGameObject()->IsAlive();
+            };
             for (auto& pair : current)
             {
+                if (!valid(pair.a) || !valid(pair.b))
+                    continue;
                 if (_previousCollisions.find(pair) == _previousCollisions.end())
                 {
                     CallListenersEnter(pair.a, pair.b);
@@ -188,6 +200,8 @@ namespace GameEngine {
 
             for (auto& pair : _previousCollisions)
             {
+                if (!valid(pair.a) || !valid(pair.b))
+                    continue;
                 if (current.find(pair) == current.end())
                 {
                     CallListenersExit(pair.a, pair.b);

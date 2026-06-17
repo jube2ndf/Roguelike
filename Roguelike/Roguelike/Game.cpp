@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Wall.h"
 #include "DoorLVL.h"
+#include <TransformComponent.h>
 #include <AudioManager.h>
 #include <EventBus.h>
 #include <Logger.h>
@@ -18,6 +19,12 @@ void Roguelike::Game::Initialize() {
     LOG_INFO("CombatSystem", "Add action");
     this->_combat->QueueAction(a);
   });
+
+    GameEngine::EventBus::Subscribe<SwitchScene>([this](const SwitchScene& a) {
+        LOG_INFO("Scene", "Edit current scene");
+        this->switchLVLs(a);
+    });
+
   this->_engine->AddLayer(this->_combat.get());
   GameEngine::AudioManager::Initialize();
   GameEngine::AudioManager::PlayMusic("./Resources/Music/fon.ogg", true);
@@ -28,8 +35,26 @@ void Roguelike::Game::Initialize() {
 
 void Roguelike::Game::switchLVLs(const SwitchScene& a)
 {
+    if (a.openedLVL == "next")
+    {
+        auto scene = this->_engine->GetSceneManager().GetActiveScene();
+        scene->ClearScene();
+        this->_engine->ClearCollision();
+        Maze maze;
+        for (auto& p : maze.CreateMaze(8, 5, 6))
+            Wall::CreateWall(*scene, p, {32.f, 32.f});
 
-    this->_engine->GetSceneManager().SwitchScene(a.openedLVL);
+        if (scene->FindWithTag("Player"))
+        {
+            auto pos = maze.FindFreeCellPlayer();
+            scene->FindWithTag("Player")
+                ->GetComponent<GameEngine::TransformComponent>()
+                ->SetWorldPosition(pos);
+        }
+        Enemy::Create(*scene, maze.FindFreeCellEnemy());
+        Door::Create(*scene, "next", maze.FindFreeCellDoor(), {32.f, 32.f});
+    }
+    //this->_engine->GetSceneManager().SwitchScene(a.openedLVL);
 }
 
 void Roguelike::Game::CreateLevel1()
@@ -41,5 +66,5 @@ void Roguelike::Game::CreateLevel1()
   
   Player::Create(scene, maze.FindFreeCellPlayer());
   Enemy::Create(scene, maze.FindFreeCellEnemy());
-  Door::Create(scene, "Level2", maze.FindFreeCellDoor(), {32.f, 32.f});
+  Door::Create(scene, "next", maze.FindFreeCellDoor(), {32.f, 32.f});
 }

@@ -29,6 +29,8 @@ namespace GameEngine {
 
 		Camera &GetCamera() { return _camera; }
 
+		void ClearScene();
+
     private:
         Camera _camera;
 		std::vector <std::unique_ptr< GameObject >> _objects;
