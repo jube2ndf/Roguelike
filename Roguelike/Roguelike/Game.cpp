@@ -3,6 +3,7 @@
 #include "Maze.h"
 #include "Player.h"
 #include "Wall.h"
+#include "DoorLVL.h"
 #include <AudioManager.h>
 #include <EventBus.h>
 #include <Logger.h>
@@ -25,7 +26,14 @@ void Roguelike::Game::Initialize() {
   this->_engine->GetSceneManager().SwitchScene("Level1");
 }
 
-void Roguelike::Game::CreateLevel1() {
+void Roguelike::Game::switchLVLs(const SwitchScene& a)
+{
+
+    this->_engine->GetSceneManager().SwitchScene(a.openedLVL);
+}
+
+void Roguelike::Game::CreateLevel1()
+{
   auto &scene = this->_engine->GetSceneManager().CreateScene("Level1");
   Maze maze;
   for (auto &p : maze.CreateMaze(8, 5, 6))
@@ -33,4 +41,5 @@ void Roguelike::Game::CreateLevel1() {
   
   Player::Create(scene, maze.FindFreeCellPlayer());
   Enemy::Create(scene, maze.FindFreeCellEnemy());
+  Door::Create(scene, "Level2", maze.FindFreeCellDoor(), {32.f, 32.f});
 }

@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="ArmorComponent.cpp" />
     <ClCompile Include="CombatSystem.cpp" />
+    <ClCompile Include="DoorTrigget.cpp" />
     <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EntityVision.cpp" />
     <ClCompile Include="EnemyMovementComponent.cpp" />
@@ -174,6 +175,8 @@
     <ClInclude Include="CombatAction.h" />
     <ClInclude Include="CombatActionType.h" />
     <ClInclude Include="CombatSystem.h" />
+    <ClInclude Include="DoorLVL.h" />
+    <ClInclude Include="DoorTrigget.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAI.h" />
     <ClInclude Include="EntityVision.h" />
@@ -184,6 +187,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAttackComponent.h" />
     <ClInclude Include="PlayerMovementComponent.h" />
+    <ClInclude Include="SceneSwitch.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -128,8 +128,39 @@ sf::Vector2f Roguelike::Maze::FindFreeCellEnemy() {
   }
 }
 
+sf::Vector2f Roguelike::Maze::FindFreeCellDoor()
+{
+    for (int i = 0; i < this->_height * this->_width; i++)
+    {
+        int x = rand() % this->_width;
+        int y = rand() % this->_height;
+
+        if (this->_map[y * this->_width + x] == MazeCell::room)
+        {
+            this->_map[y * this->_width + x] = MazeCell::door;
+            this->positionDoor = {x * 32.f, y * 32.f};
+            return {x * 32.f, y * 32.f};
+        }
+    }
+}
+
 Roguelike::Maze::MazeCell &Roguelike::Maze::At(int x, int y) {
   return this->_map[y * this->_width + x];
+}
+
+std::vector<std::pair<sf::Vector2f, int>> Roguelike::Maze::GetPositionEnemys()
+{
+    return this->enemy;
+}
+
+void Roguelike::Maze::SetPositionEnemys(std::vector<std::pair<sf::Vector2f, int>> enemy)
+{
+    this->enemy = enemy;
+}
+
+sf::Vector2f Roguelike::Maze::GetPositionDoor()
+{
+    return this->positionDoor;
 }
 
 bool Roguelike::Maze::deadend(int x, int y) {
