@@ -20,11 +20,11 @@ class Door
 
         tr->SetWorldPosition(pos);
 
-        auto col =
+        auto rend =
             exit->AddComponent<GameEngine::SpriteRenderer>(
                 GameEngine::TextureManager::load("./Resources/Textures/door.png")
             );
-
+        rend->sortingLayer = 1;
         auto collider =
             exit->AddComponent<DoorTrigget>(path2Scene);
         collider->size = size;

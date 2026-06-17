@@ -25,7 +25,7 @@ namespace Roguelike {
             rb->isKinematic = true;
 
             auto rend = wall->AddComponent<GameEngine::SpriteRenderer>(GameEngine::TextureManager::load("./Resources/Textures/Wall.png"));
-
+            rend->sortingLayer = 5;
             return wall;
         }
 	};

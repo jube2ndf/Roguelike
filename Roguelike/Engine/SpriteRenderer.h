@@ -23,9 +23,10 @@ namespace GameEngine {
         sf::Sprite& GetSprite() {
             return this->_sprite;
         }
+        int sortingLayer = 0;
     protected:
         sf::Sprite _sprite;
 
-        int sortingLayer = 0;
+        
     };
 }

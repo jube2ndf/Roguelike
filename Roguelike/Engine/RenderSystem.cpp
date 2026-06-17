@@ -16,11 +16,43 @@ void GameEngine::RenderSystem::Render(sf::RenderWindow &window, Scene *scene) {
 
   float margin = 50.f;
 
+  std::vector<GameObject*> renderQueue;
+
   sf::FloatRect viewRect(
       {center.x - size.x * 0.5f - margin, center.y - size.y * 0.5f - margin},
       {size.x + margin * 2.f, size.y + margin * 2.f});
 
-  for (auto &object : scene->GetObjects()) {
+  for (auto& object : scene->GetObjects())
+  {
+      auto* spriteRenderer =
+          object->GetComponent<SpriteRenderer>();
+
+      if (!spriteRenderer)
+          continue;
+
+      if (!viewRect.findIntersection(
+              spriteRenderer->GetSprite().getGlobalBounds()))
+          continue;
+
+      renderQueue.push_back(object.get());
+  }
+
+  std::sort(
+      renderQueue.begin(),
+      renderQueue.end(),
+      [](GameObject* a, GameObject* b) {
+          auto* sa =
+              a->GetComponent<SpriteRenderer>();
+
+          auto* sb =
+              b->GetComponent<SpriteRenderer>();
+
+          return sa->sortingLayer <
+                 sb->sortingLayer;
+      });
+
+  for (auto& object : renderQueue)
+  {
     if (auto spriteRenderer = object->GetComponent<SpriteRenderer>()) {
       if (!viewRect.findIntersection(spriteRenderer->GetSprite().getGlobalBounds()))
         continue;

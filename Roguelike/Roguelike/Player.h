@@ -43,7 +43,7 @@ namespace Roguelike {
                 CollisionLayers::Attack |
                 CollisionLayers::Door;
             auto rend = player->AddComponent<GameEngine::SpriteRenderer>(GameEngine::TextureManager::load("./Resources/Textures/Player.png"));
-
+            rend->sortingLayer = 10;
             collider->size = { 8,8 };
 
             player->AddComponent<GameEngine::TagComponent>("Player");

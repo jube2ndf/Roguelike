@@ -47,7 +47,7 @@ namespace Roguelike {
                 CollisionLayers::PlayerBody;
 
             auto rend = enemy->AddComponent<GameEngine::SpriteRenderer>(GameEngine::TextureManager::load("./Resources/Textures/Player.png"));
-
+            rend->sortingLayer = 10;
             collider->size = { 8,8 };
 
             enemy->AddComponent<GameEngine::TagComponent>("Enemy");
