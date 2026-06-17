@@ -4,6 +4,8 @@
 #include "SceneSwitch.h"
 void Roguelike::DoorTrigget::OnTriggerEnter(GameEngine::Collider* other)
 {
+    if (!this->isOpen)
+        return;
     for (auto iter: other->GetGameObject()->GetComponents<GameEngine::TagComponent>())
     {
         if (iter->GetTag() == "Player")
@@ -14,4 +16,9 @@ void Roguelike::DoorTrigget::OnTriggerEnter(GameEngine::Collider* other)
         }
     }
     return;
+}
+
+void Roguelike::DoorTrigget::OpenDoor()
+{
+    this->isOpen = true;
 }

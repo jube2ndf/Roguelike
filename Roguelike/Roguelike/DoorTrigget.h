@@ -12,9 +12,9 @@ class DoorTrigget: public GameEngine::BoxCollider,
         this->isTrigger = true;
     }
     void OnTriggerEnter(GameEngine::Collider* other) override;
-
+    void OpenDoor();
   private:
+    bool isOpen = false;
     std::string door2LVL;
 };
-
 } // namespace Roguelike

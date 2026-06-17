@@ -181,6 +181,7 @@
     <ClInclude Include="EnemyAI.h" />
     <ClInclude Include="EntityVision.h" />
     <ClInclude Include="EnemyMovementComponent.h" />
+    <ClInclude Include="EventDieBoss.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="Maze.h" />

@@ -19,6 +19,7 @@ namespace GameEngine {
         void DestroyMarked();
 
 		GameObject* FindWithTag(std::string tagName);
+        std::vector<GameObject*> FindWithTags(std::string tagName);
 
         void DestroyAll();
 		void DestroyDead();

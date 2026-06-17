@@ -37,6 +37,22 @@ GameEngine::GameObject* GameEngine::Scene::FindWithTag(std::string tagName)
     return nullptr;
 }
 
+std::vector<GameEngine::GameObject*> GameEngine::Scene::FindWithTags(std::string tagName)
+{
+    std::vector<GameObject*> result;
+    for (int i = 0;
+         i < this->_objects.size();
+         i++)
+    {
+        auto tag = this->_objects[i]->GetComponent<TagComponent>();
+        if (tag && tag->GetTag() == tagName)
+        {
+            result.push_back(this->_objects[i].get());
+        }
+    }
+    return result;
+}
+
 void GameEngine::Scene::DestroyDead()
 {
     _objects.erase(

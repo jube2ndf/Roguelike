@@ -30,9 +30,9 @@ void GameEngine::RenderSystem::Render(sf::RenderWindow &window, Scene *scene) {
       if (!spriteRenderer)
           continue;
 
-      /*if (!viewRect.findIntersection(
+      if (!viewRect.findIntersection(
               spriteRenderer->GetSprite().getGlobalBounds()))
-          continue;*/
+          continue;
 
       renderQueue.push_back(object.get());
   }
