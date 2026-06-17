@@ -28,7 +28,7 @@ void Roguelike::Game::Initialize() {
 void Roguelike::Game::CreateLevel1() {
   auto &scene = this->_engine->GetSceneManager().CreateScene("Level1");
   Maze maze;
-  for (auto &p : maze.CreateMaze())
+  for (auto &p : maze.CreateMaze(8, 5, 6))
     Wall::CreateWall(scene, p, {32.f, 32.f});
   
   Player::Create(scene, maze.FindFreeCellPlayer());
