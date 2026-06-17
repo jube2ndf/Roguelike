@@ -26,7 +26,5 @@ namespace GameEngine {
         int sortingLayer = 0;
     protected:
         sf::Sprite _sprite;
-
-        
     };
 }

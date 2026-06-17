@@ -53,10 +53,26 @@ namespace GameEngine
         template<typename T>
         static void Emit(const T& event)
         {
+            /*auto& container = GetContainer<T>();
+
+            for (auto& [id, handler] : container.handlers)
+                handler(event);*/
             auto& container = GetContainer<T>();
 
             for (auto& [id, handler] : container.handlers)
-                handler(event);
+            {
+                _queue.emplace_back([handler, event]() {
+                    handler(event);
+                });
+            }
+        }
+
+        static void Process()
+        {
+            for (auto& job : _queue)
+                job();
+
+            _queue.clear();
         }
 
         static void Clear()
@@ -88,7 +104,7 @@ namespace GameEngine
             std::type_index,
             std::unique_ptr<IContainer>
         > _containers;
-
+      inline static std::vector<std::function<void()>> _queue;
         inline static HandlerId _idCounter = 0;
     };
 }

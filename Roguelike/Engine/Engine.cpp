@@ -17,6 +17,7 @@
 #include "Logger.h"
 #include "ConsoleSink.h"
 #include "FileSink.h"
+#include "EventBus.h"
 
 
 constexpr float FIXED_TIMESTEP = 1.0f / 60.0f;
@@ -52,7 +53,7 @@ void Engine::Run()
 
         if (dt > 0.25f)
             dt = 0.25f;
-
+        GameEngine::EventBus::Process();
         accumulator += dt;
 
         while (const std::optional<sf::Event> e = this->_window.pollEvent())
@@ -77,12 +78,12 @@ void Engine::Run()
         }
         this->update.Update(scene, dt);
 
-        this->render.Render(this->_window, scene);
-
         for (auto iter : scene->GetDeadObjects()) {
             this->collision.RemoveObject(iter);
         }
         scene->DestroyDead();
+        
+        this->render.Render(this->_window, scene);
     }
 }
 

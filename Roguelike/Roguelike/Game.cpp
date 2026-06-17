@@ -47,14 +47,13 @@ void Roguelike::Game::switchLVLs(const SwitchScene& a)
         if (scene->FindWithTag("Player"))
         {
             auto pos = maze.FindFreeCellPlayer();
-            scene->FindWithTag("Player")
-                ->GetComponent<GameEngine::TransformComponent>()
+            auto player = scene->FindWithTag("Player");
+            player->GetComponent<GameEngine::TransformComponent>()
                 ->SetWorldPosition(pos);
         }
         Enemy::Create(*scene, maze.FindFreeCellEnemy());
         Door::Create(*scene, "next", maze.FindFreeCellDoor(), {32.f, 32.f});
     }
-    //this->_engine->GetSceneManager().SwitchScene(a.openedLVL);
 }
 
 void Roguelike::Game::CreateLevel1()
