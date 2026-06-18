@@ -2,6 +2,7 @@
 #include <GameObject.h>
 #include <Rigidbody.h>
 #include <BoxCollider.h>
+#include <Logger.h>
 #include <Scene.h>
 #include <ShapeRenderer.h>
 #include "PlayerMovementComponent.h"
@@ -22,6 +23,7 @@ namespace Roguelike {
         static GameEngine::GameObject* Create(GameEngine::Scene& scene, sf::Vector2f pos)
         {
             auto player = scene.CreateObject();
+            LOG_INFO("Game", "Player create: " + std::to_string(reinterpret_cast<uintptr_t>(player)));
             player->persistentObjects = true;
 
             player->AddComponent<PlayerMovementComponent>();

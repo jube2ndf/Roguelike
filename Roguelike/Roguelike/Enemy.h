@@ -15,6 +15,7 @@
 #include "ArmorComponent.h"
 #include "CollisionLayers.h"
 #include "EnemyAI.h"
+#include <Logger.h>
 namespace Roguelike {
     class Enemy
     {
@@ -22,7 +23,7 @@ namespace Roguelike {
         static GameEngine::GameObject* Create(GameEngine::Scene& scene, sf::Vector2f pos)
         {
             auto enemy = scene.CreateObject();
-
+            LOG_INFO("Game", "Enemy create: " + std::to_string(reinterpret_cast<uintptr_t>(enemy)));
             auto t = enemy->GetComponent<GameEngine::TransformComponent>();
             t->SetWorldPosition(pos);
 

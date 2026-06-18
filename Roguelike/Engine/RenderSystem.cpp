@@ -6,6 +6,7 @@
 #include "ShapeRenderer.h"
 #include "SpriteRenderer.h"
 #include "TransformComponent.h"
+#include "Logger.h"
 
 void GameEngine::RenderSystem::Render(sf::RenderWindow &window, Scene *scene) {
   window.clear();
@@ -14,7 +15,7 @@ void GameEngine::RenderSystem::Render(sf::RenderWindow &window, Scene *scene) {
   auto center = window.getView().getCenter();
   auto size = window.getView().getSize();
 
-  float margin = 50.f;
+  float margin = 200.f;
 
   std::vector<GameObject*> renderQueue;
 
@@ -32,8 +33,10 @@ void GameEngine::RenderSystem::Render(sf::RenderWindow &window, Scene *scene) {
 
       if (!viewRect.findIntersection(
               spriteRenderer->GetSprite().getGlobalBounds()))
+      {
+          //LOG_INFO("Render", "Object not render: " + std::to_string(reinterpret_cast<uintptr_t>(object.get())));
           continue;
-
+      }
       renderQueue.push_back(object.get());
   }
 
