@@ -12,9 +12,11 @@
 #include <TagComponent.h>
 #include "HealthComponent.h"
 #include "ArmorComponent.h"
-#include "PlayerAttackComponent.h"
+#include "AttackComponent.h"
 #include "EntityVision.h"
 #include "CollisionLayers.h"
+#include "SimpleAttack.h"
+#include "FastSwordProjectile.h"
 
 namespace Roguelike {
 	class Player
@@ -38,13 +40,15 @@ namespace Roguelike {
 
             auto collider =
                 player->AddComponent<GameEngine::BoxCollider>();
-            collider->layer = CollisionLayers::PlayerBody;
+            collider->layer = CollisionLayers::PlayerBody |
+                              CollisionLayers::DamageTaken;
             collider->mask =
                 CollisionLayers::GameObject |
                 CollisionLayers::EnemyBody |
                 CollisionLayers::Vision |
                 CollisionLayers::Attack |
-                CollisionLayers::Door;
+                CollisionLayers::Door |
+                CollisionLayers::Projectile;
             auto rend = player->AddComponent<GameEngine::SpriteRenderer>(GameEngine::TextureManager::load("./Resources/Textures/Player.png"));
             rend->sortingLayer = 10;
             collider->size = { 8,8 };
@@ -55,19 +59,11 @@ namespace Roguelike {
 
             auto armor = player->AddComponent<ArmorComponent>();
             armor->baseArmor = 10;
+            
+            player->AddComponent<SimpleAttack>();
 
-            auto AttackComponent = player->AddComponent<PlayerAttackComponent>();
+            FastSwordProjectile::AddFastSwordProjectile(player);
 
-            AttackComponent->damage = 30.f;
-            AttackComponent->cooldown = 3.f;
-            AttackComponent->timer = 3.f;
-
-
-            auto entityVision = player->AddComponent<EntityVision>();
-            entityVision->size = { 50, 50 };
-            entityVision->layer = CollisionLayers::Vision;
-            entityVision->mask = 
-                CollisionLayers::EnemyBody;
             scene.GetCamera().Follow(player);
             return player;
         }

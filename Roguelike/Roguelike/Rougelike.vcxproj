@@ -154,14 +154,20 @@
     <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EntityVision.cpp" />
     <ClCompile Include="EnemyMovementComponent.cpp" />
+    <ClCompile Include="FastSwordProjectile.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Math.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAttackComponent.cpp" />
     <ClCompile Include="PlayerMovementComponent.cpp" />
+    <ClCompile Include="BoxCollisionDetector.cpp" />
+    <ClCompile Include="ProjectileComponent.cpp" />
+    <ClCompile Include="SimpleAttack.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="WeaponFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
@@ -175,6 +181,8 @@
     <ClInclude Include="CombatAction.h" />
     <ClInclude Include="CombatActionType.h" />
     <ClInclude Include="CombatSystem.h" />
+    <ClInclude Include="CreateWeapon.h" />
+    <ClInclude Include="Damage.h" />
     <ClInclude Include="DoorLVL.h" />
     <ClInclude Include="DoorTrigget.h" />
     <ClInclude Include="Enemy.h" />
@@ -182,14 +190,22 @@
     <ClInclude Include="EntityVision.h" />
     <ClInclude Include="EnemyMovementComponent.h" />
     <ClInclude Include="EventDieBoss.h" />
+    <ClInclude Include="FastSwordProjectile.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="Maze.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAttackComponent.h" />
     <ClInclude Include="PlayerMovementComponent.h" />
+    <ClInclude Include="BoxCollisionDetector.h" />
+    <ClInclude Include="ProjectileComponent.h" />
     <ClInclude Include="SceneSwitch.h" />
+    <ClInclude Include="SimpleAttack.h" />
+    <ClInclude Include="SpawnEvent.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="WeaponFactory.h" />
+    <ClInclude Include="WeaponType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

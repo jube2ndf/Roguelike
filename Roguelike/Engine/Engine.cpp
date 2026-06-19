@@ -17,7 +17,7 @@
 #include "Logger.h"
 #include "ConsoleSink.h"
 #include "FileSink.h"
-#include "EventBus.h"
+#include "InputGame.h"
 
 
 constexpr float FIXED_TIMESTEP = 1.0f / 60.0f;
@@ -50,7 +50,10 @@ void Engine::Run()
     while (this->_window.isOpen())
     {
         float dt = clock.restart().asSeconds();
-
+        GameEngine::InputGame::mouseWorldPosition =
+            this->_window.mapPixelToCoords(
+                sf::Mouse::getPosition(this->_window),
+                this->_sceneManager.GetActiveScene()->GetCamera().GetView());
         if (dt > 0.25f)
             dt = 0.25f;
         GameEngine::EventBus::Process();

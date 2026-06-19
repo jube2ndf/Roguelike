@@ -38,23 +38,26 @@ void Roguelike::CombatSystem::ApplyDamage(
     if (!action.target)
         return;
 
-    auto hp =
-        action.target
-        ->GetComponent<HealthComponent>();
-
+    auto hp = action.target->GetComponent<HealthComponent>();
     if (!hp)
         return;
 
-    auto armor =
-        action.target
-        ->GetComponent<ArmorComponent>();
+    float finalDamage = action.damage.base;
 
-    if (armor) {
-
-        hp->TakeDamage(action.value * (100 / (100 + armor->GetArmor())));
+    if (action.damage.critChance > 0.f)
+    {
+        float roll = rand() % 100 / 100.f;
+        if (roll < action.damage.critChance)
+            finalDamage *= action.damage.critMultiplier;
     }
-    else
-        hp->TakeDamage(action.value);
+
+    if (auto armor = action.target->GetComponent<ArmorComponent>())
+    {
+        float a = armor->GetArmor();
+        finalDamage *= (100.f / (100.f + a));
+    }
+
+    hp->TakeDamage(finalDamage);
 }
 
 void Roguelike::CombatSystem::ApplyHeal(

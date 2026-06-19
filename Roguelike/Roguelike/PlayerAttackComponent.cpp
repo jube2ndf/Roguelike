@@ -65,7 +65,6 @@ void Roguelike::PlayerAttackComponent::Update(float dt)
     action.type = CombatActionType::Damage;
     action.source = GetGameObject();
     action.target = closest;
-    action.value = this->damage;
     LOG_INFO("PlayerPressAttack",
         "target: " + std::to_string(reinterpret_cast<uintptr_t>(action.target)));
     GameEngine::EventBus::Emit(action);

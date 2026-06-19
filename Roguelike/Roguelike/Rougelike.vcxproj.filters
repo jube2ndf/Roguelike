@@ -28,6 +28,9 @@
     <Filter Include="Файлы заголовков\Systems\Attack">
       <UniqueIdentifier>{d52e3609-a300-4092-ae15-6848ca4cba44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Weapon">
+      <UniqueIdentifier>{7cdb5321-4bcd-4ddf-8bf0-d5e6b40b9f29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -70,6 +73,24 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="DoorTrigget.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollisionDetector.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileComponent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleAttack.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponFactory.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="FastSwordProjectile.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -135,6 +156,36 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="EventDieBoss.h">
+      <Filter>Файлы заголовков\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollisionDetector.h">
+      <Filter>Файлы заголовков\Systems\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileComponent.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Damage.h">
+      <Filter>Файлы заголовков\Systems\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnEvent.h">
+      <Filter>Файлы заголовков\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponFactory.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleAttack.h">
+      <Filter>Файлы заголовков\Systems\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateWeapon.h">
+      <Filter>Файлы заголовков\Systems\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponType.h">
+      <Filter>Файлы заголовков\Systems\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="FastSwordProjectile.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
       <Filter>Файлы заголовков\Systems</Filter>
     </ClInclude>
   </ItemGroup>

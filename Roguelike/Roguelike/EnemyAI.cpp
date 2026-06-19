@@ -6,6 +6,7 @@
 #include "AttackComponent.h"
 #include "EntityVision.h"
 #include <unordered_set>
+#include "Math.h"
 
 
 void Roguelike::EnemyAI::Update(float dt)
@@ -75,20 +76,18 @@ void Roguelike::EnemyAI::Update(float dt)
         toTarget /= dist;
 
     float stopDistance =
-        attack->distance +
         GetGameObject()->GetComponent<GameEngine::BoxCollider>()->GetRadius() +
         closest->GetComponent<GameEngine::BoxCollider>()->GetRadius();
+
+    if (attack->CanAttack())
+    {
+        Attack();
+        attack->ResetCooldown();
+    }
 
     if (dist < stopDistance)
     {
         rb->velocity = { 0.f, 0.f };
-
-        if (attack->CanAttack())
-        {
-            Attack();
-            attack->ResetCooldown();
-        }
-
         return;
     }
 
@@ -102,13 +101,22 @@ void Roguelike::EnemyAI::Attack()
     if (!attack || !Ai || !closest)
         return;
 
-    CombatAction action;
-    action.source = GetGameObject();
-    action.target = closest;
-
-    action.value = attack->damage;
-    action.type = CombatActionType::Damage;
-
-    GameEngine::EventBus::Emit(action);
+    auto transform =
+        this->GetGameObject()->GetComponent<GameEngine::TransformComponent>();
+    auto transformTarget =
+        this->closest->GetComponent<GameEngine::TransformComponent>();
+    sf::Vector2f enemy =
+        transform->GetWorldPosition();
+    auto direction = Math::Normalize(transformTarget->GetWorldPosition() - enemy);
+    if (attack)
+    {
+        CreateWeapon dto;
+        dto.data.direction = direction;
+        dto.data.position = enemy;
+        dto.type = attack->type;
+        dto.source = this->GetGameObject();
+        GameEngine::EventBus::Emit(dto);
+        this->used->ResetCooldown();
+    }
 }
 

@@ -9,6 +9,8 @@
 #include <EventBus.h>
 #include <Logger.h>
 #include "EventDieBoss.h"
+#include "WeaponFactory.h"
+#include "CreateWeapon.h"
 
 Roguelike::Game::Game(Engine &engine) {
   this->_engine = &engine;
@@ -20,6 +22,11 @@ void Roguelike::Game::Initialize() {
     LOG_INFO("CombatSystem", "Add action");
     this->_combat->QueueAction(a);
   });
+
+    GameEngine::EventBus::Subscribe<CreateWeapon>([this](const CreateWeapon& a) {
+        LOG_INFO("Weapon", "Create");
+      WeaponFactory::Create(*this->_engine->GetSceneManager().GetActiveScene(), a);
+    });
 
     GameEngine::EventBus::Subscribe<SwitchScene>([this](const SwitchScene& a) {
         LOG_INFO("Scene", "Edit current scene");

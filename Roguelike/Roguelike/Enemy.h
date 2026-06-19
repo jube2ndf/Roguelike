@@ -16,6 +16,7 @@
 #include "CollisionLayers.h"
 #include "EnemyAI.h"
 #include <Logger.h>
+#include "FastSwordProjectile.h"
 namespace Roguelike {
     class Enemy
     {
@@ -34,12 +35,14 @@ namespace Roguelike {
 
             auto collider =
                 enemy->AddComponent<GameEngine::BoxCollider>();
-            collider->layer = CollisionLayers::EnemyBody;
+            collider->layer = CollisionLayers::EnemyBody |
+                              CollisionLayers::DamageTaken;
             collider->mask =
                 CollisionLayers::GameObject |
                 CollisionLayers::PlayerBody |
                 CollisionLayers::Vision |
-                CollisionLayers::Attack;
+                CollisionLayers::Attack |
+                CollisionLayers::Projectile;
 
             auto enemyAI =
                 enemy->AddComponent<EntityVision>();
@@ -53,14 +56,9 @@ namespace Roguelike {
 
             enemy->AddComponent<GameEngine::TagComponent>("Enemy");
 
-            auto attack =
-                enemy->AddComponent<AttackComponent>();
-
-            attack->damage = 25.f;
-            attack->cooldown = 10.f;
-            attack->timer = 10.f;
-
             enemy->AddComponent<EnemyAI>();
+
+            FastSwordProjectile::AddFastSwordProjectile(enemy);
 
             enemy->AddComponent<HealthComponent>(100.f);
 

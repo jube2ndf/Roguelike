@@ -179,6 +179,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="IGameLayer.h" />
     <ClInclude Include="ILogSink.h" />
+    <ClInclude Include="InputGame.h" />
     <ClInclude Include="ITriggerListener.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LogMessage.h" />

@@ -1,14 +1,15 @@
 #pragma once
 #include <Component.h>
 #include <GameObject.h>
+#include "SimpleAttack.h"
 
 namespace Roguelike {
 	class EnemyAI:
-		public GameEngine::Component
+		public SimpleAttack
 	{
 	public:
 		EnemyAI(GameEngine::GameObject* owner) :
-			Component(owner) {
+			SimpleAttack(owner) {
 		}
 		float speed = 120.f;
 
