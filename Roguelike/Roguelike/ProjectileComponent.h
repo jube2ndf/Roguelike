@@ -11,7 +11,7 @@ class ProjectileComponent: public GameEngine::Component
                         float damage,
                         float critChance,
                         float critMultiplier,
-                        DamageType type,
+                        Damage::Context type,
                         GameEngine::GameObject* source);
 
     virtual void Start();

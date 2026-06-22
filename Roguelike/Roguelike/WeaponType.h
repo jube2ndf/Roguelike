@@ -4,7 +4,8 @@ namespace Roguelike
 {
 enum class WeaponType
 {
-    SlowSword,
-    FastSword,
+    SlowSwordProjectile,
+    FastSwordProjectile,
+    SwordsRotating,
 };
 } // namespace Roguelike

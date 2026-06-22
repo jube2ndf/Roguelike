@@ -16,7 +16,7 @@
 #include "EntityVision.h"
 #include "CollisionLayers.h"
 #include "SimpleAttack.h"
-#include "FastSwordProjectile.h"
+#include "SwordProjectile.h"
 
 namespace Roguelike {
 	class Player
@@ -62,7 +62,7 @@ namespace Roguelike {
             
             player->AddComponent<SimpleAttack>();
 
-            FastSwordProjectile::AddFastSwordProjectile(player);
+            SwordProjectile::AddSwordProjectile(player, WeaponType::FastSwordProjectile);
 
             scene.GetCamera().Follow(player);
             return player;

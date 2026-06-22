@@ -9,7 +9,7 @@ namespace Roguelike
     {
     public:
         AttackComponent(GameEngine::GameObject* owner)
-          : AttackComponent(owner, WeaponType::FastSword)
+          : AttackComponent(owner, WeaponType::FastSwordProjectile)
       {
 
         }

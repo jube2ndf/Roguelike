@@ -1,8 +1,8 @@
-#include "FastSwordProjectile.h"
+#include "SwordProjectile.h"
 #include "SimpleAttack.h"
 #include <Logger.h>
 
-void Roguelike::FastSwordProjectile::AddFastSwordProjectile(GameEngine::GameObject* owner)
+void Roguelike::SwordProjectile::AddSwordProjectile(GameEngine::GameObject* owner, WeaponType type)
 {
     SimpleAttack* attack = owner->GetComponent<SimpleAttack>();
     if (!attack)
@@ -17,12 +17,12 @@ void Roguelike::FastSwordProjectile::AddFastSwordProjectile(GameEngine::GameObje
     }
 
     auto attackComponent = owner->AddComponent<AttackComponent>();
-    attackComponent->cooldown = 0.5f;
-    attackComponent->type = WeaponType::FastSword;
+    attackComponent->cooldown = WeaponFactory::culDown.find(type)->second;
+    attackComponent->type = type;
     attack->used = attackComponent;
 }
 
-void Roguelike::FastSwordProjectile::RemoveFastSwordProjectile(GameEngine::GameObject* owner)
+void Roguelike::SwordProjectile::RemoveSwordProjectile(GameEngine::GameObject* owner, WeaponType type)
 {
     SimpleAttack* attack = owner->GetComponent<SimpleAttack>();
     if (!attack)
@@ -34,11 +34,6 @@ void Roguelike::FastSwordProjectile::RemoveFastSwordProjectile(GameEngine::GameO
     if (!attack->used)
     {
         LOG_WARN("Attack", "SimpleAttack is empty");
-        return;
-    }
-    if (attack->used->type != WeaponType::FastSword)
-    {
-        LOG_INFO("Attack", "Try remove FastSword, but SimpleAttack other WeaponType");
         return;
     }
 

@@ -154,7 +154,7 @@
     <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EntityVision.cpp" />
     <ClCompile Include="EnemyMovementComponent.cpp" />
-    <ClCompile Include="FastSwordProjectile.cpp" />
+    <ClCompile Include="SwordProjectile.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="main.cpp" />
@@ -165,6 +165,7 @@
     <ClCompile Include="PlayerMovementComponent.cpp" />
     <ClCompile Include="BoxCollisionDetector.cpp" />
     <ClCompile Include="ProjectileComponent.cpp" />
+    <ClCompile Include="RotatingProjectileComponent.cpp" />
     <ClCompile Include="SimpleAttack.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WeaponFactory.cpp" />
@@ -190,7 +191,7 @@
     <ClInclude Include="EntityVision.h" />
     <ClInclude Include="EnemyMovementComponent.h" />
     <ClInclude Include="EventDieBoss.h" />
-    <ClInclude Include="FastSwordProjectile.h" />
+    <ClInclude Include="SwordProjectile.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="Math.h" />
@@ -200,6 +201,7 @@
     <ClInclude Include="PlayerMovementComponent.h" />
     <ClInclude Include="BoxCollisionDetector.h" />
     <ClInclude Include="ProjectileComponent.h" />
+    <ClInclude Include="RotatingProjectileComponent.h" />
     <ClInclude Include="SceneSwitch.h" />
     <ClInclude Include="SimpleAttack.h" />
     <ClInclude Include="SpawnEvent.h" />

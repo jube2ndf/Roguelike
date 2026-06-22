@@ -18,10 +18,26 @@ class WeaponFactory
         float damage,
         float critChance,
         float critMultiplier,
-        DamageType type,
+        Damage::Context type,
         float speed,
-        WeaponType Wtype);
+        WeaponType Wtype,
+        sf::Vector2f size,
+        std::string spritTexture);
+
+    static void CreaetSwordsRotating(GameEngine::Scene& scene,
+                            CreateWeapon data,
+                            float damage,
+                            float critChance,
+                            float critMultiplier,
+                            Damage::Context type,
+                            float speed,
+                            WeaponType Wtype,
+    sf::Vector2f size,
+    std::string spritTexture);
+
     static void SlowSword(GameEngine::Scene& scene, CreateWeapon data);
     static void FastSword(GameEngine::Scene& scene, CreateWeapon data);
+    static void SwordsRotating(GameEngine::Scene& scene, CreateWeapon dto);
+    static void FireBallRotating(GameEngine::Scene& scene, CreateWeapon dto);
 };
 } // namespace Roguelike

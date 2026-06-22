@@ -59,6 +59,7 @@ void Roguelike::EnemyAI::Update(float dt)
         rb->velocity = { 0.f, 0.f };
         return;
     }
+
     auto* targetTr = closest->GetComponent<GameEngine::TransformComponent>();
     if (!targetTr) {
         rb->velocity = { 0.f, 0.f };
@@ -75,23 +76,51 @@ void Roguelike::EnemyAI::Update(float dt)
     if (dist > 0.0001f)
         toTarget /= dist;
 
-    float stopDistance =
-        GetGameObject()->GetComponent<GameEngine::BoxCollider>()->GetRadius() +
-        closest->GetComponent<GameEngine::BoxCollider>()->GetRadius();
+    float desiredDistance =
+        GetGameObject()->GetComponent<GameEngine::BoxCollider>()->GetRadius() * 2 +
+        closest->GetComponent<GameEngine::BoxCollider>()->GetRadius() * 2;
+
+    float distanceTolerance = 16.f;
+
+    // Нормализованный вектор к цели уже есть в toTarget
+
+    // Перпендикуляр к цели
+    sf::Vector2f side =
+        {
+            -toTarget.y,
+            toTarget.x};
+
+    // направление обхода: 1 или -1
+    side *= (std::rand() % 2 == 0)
+                ? 1.f
+                : -1.f;
+
+    sf::Vector2f moveDir{0.f, 0.f};
+
+    if (dist > desiredDistance + distanceTolerance)
+    {
+        // Подходим к цели
+        moveDir = toTarget;
+    }
+    else if (dist < desiredDistance - distanceTolerance)
+    {
+        // Отходим от цели
+        moveDir = -toTarget;
+    }
+    else
+    {
+        // Находимся на нужной дистанции —
+        // двигаемся по окружности вокруг игрока
+        moveDir = side;
+    }
+
+    rb->velocity = moveDir * speed;
 
     if (attack->CanAttack())
     {
         Attack();
         attack->ResetCooldown();
     }
-
-    if (dist < stopDistance)
-    {
-        rb->velocity = { 0.f, 0.f };
-        return;
-    }
-
-    rb->velocity = toTarget * speed;
 }
 
 void Roguelike::EnemyAI::Attack()

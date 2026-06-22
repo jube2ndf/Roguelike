@@ -9,7 +9,7 @@ Roguelike::ProjectileComponent::ProjectileComponent(
     float damage,
     float critChance,
     float critMultiplier,
-    DamageType type,
+    Damage::Context type,
     GameEngine::GameObject* source
 )
     : Component(owner)

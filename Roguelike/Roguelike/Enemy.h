@@ -16,7 +16,7 @@
 #include "CollisionLayers.h"
 #include "EnemyAI.h"
 #include <Logger.h>
-#include "FastSwordProjectile.h"
+#include "SwordProjectile.h"
 namespace Roguelike {
     class Enemy
     {
@@ -58,7 +58,7 @@ namespace Roguelike {
 
             enemy->AddComponent<EnemyAI>();
 
-            FastSwordProjectile::AddFastSwordProjectile(enemy);
+            SwordProjectile::AddSwordProjectile(enemy, WeaponType::SlowSwordProjectile);
 
             enemy->AddComponent<HealthComponent>(100.f);
 

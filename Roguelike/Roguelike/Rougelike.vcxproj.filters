@@ -31,6 +31,9 @@
     <Filter Include="Файлы заголовков\Weapon">
       <UniqueIdentifier>{7cdb5321-4bcd-4ddf-8bf0-d5e6b40b9f29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Door">
+      <UniqueIdentifier>{e6c34ee2-ed54-45d4-b16c-6142da04460a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -87,10 +90,13 @@
     <ClCompile Include="WeaponFactory.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="FastSwordProjectile.cpp">
+    <ClCompile Include="SwordProjectile.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Math.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="RotatingProjectileComponent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,12 +152,6 @@
     <ClInclude Include="Maze.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="DoorTrigget.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="DoorLVL.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="SceneSwitch.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -161,20 +161,11 @@
     <ClInclude Include="BoxCollisionDetector.h">
       <Filter>Файлы заголовков\Systems\Attack</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectileComponent.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Damage.h">
       <Filter>Файлы заголовков\Systems\Attack</Filter>
     </ClInclude>
     <ClInclude Include="SpawnEvent.h">
       <Filter>Файлы заголовков\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponFactory.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="SimpleAttack.h">
-      <Filter>Файлы заголовков\Systems\Attack</Filter>
     </ClInclude>
     <ClInclude Include="CreateWeapon.h">
       <Filter>Файлы заголовков\Systems\Attack</Filter>
@@ -182,11 +173,29 @@
     <ClInclude Include="WeaponType.h">
       <Filter>Файлы заголовков\Systems\Attack</Filter>
     </ClInclude>
-    <ClInclude Include="FastSwordProjectile.h">
+    <ClInclude Include="SwordProjectile.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Файлы заголовков\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleAttack.h">
+      <Filter>Файлы заголовков\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileComponent.h">
+      <Filter>Файлы заголовков\Systems\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorLVL.h">
+      <Filter>Файлы заголовков\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorTrigget.h">
+      <Filter>Файлы заголовков\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponFactory.h">
+      <Filter>Файлы заголовков\Systems\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="RotatingProjectileComponent.h">
+      <Filter>Файлы заголовков\Systems\Attack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
