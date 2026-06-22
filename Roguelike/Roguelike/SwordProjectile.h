@@ -9,5 +9,6 @@ class SwordProjectile
   public:
     static void AddSwordProjectile(GameEngine::GameObject* owner, WeaponType type);
     static void RemoveSwordProjectile(GameEngine::GameObject* owner, WeaponType type);
+    static void AddRotatingProjectile(GameEngine::GameObject* owner, WeaponType type);
 };
 } // namespace Roguelike

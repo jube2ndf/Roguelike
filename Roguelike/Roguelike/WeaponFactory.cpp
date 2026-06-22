@@ -18,6 +18,10 @@ std::unordered_map<Roguelike::WeaponType, float>
          0.5},
         {Roguelike::WeaponType::SwordsRotating,
          12.f},
+        {Roguelike::WeaponType::FireBallRotating,
+         10.f},
+        {Roguelike::WeaponType::FireBallFast,
+         1.f},
 };
 
 void Roguelike::WeaponFactory::Create(GameEngine::Scene& scene, CreateWeapon data)
@@ -32,6 +36,12 @@ void Roguelike::WeaponFactory::Create(GameEngine::Scene& scene, CreateWeapon dat
         break;
     case Roguelike::WeaponType::SwordsRotating:
         WeaponFactory::SwordsRotating(scene, data);
+        break;
+    case Roguelike::WeaponType::FireBallRotating:
+        WeaponFactory::FireBallRotating(scene, data);
+        break;
+    case Roguelike::WeaponType::FireBallFast:
+        WeaponFactory::FireBallFast(scene, data);
         break;
     default:
         break;
@@ -83,7 +93,7 @@ void Roguelike::WeaponFactory::CreaetSword(
         sword->AddComponent<AttackComponent>(Wtype);
     auto collider =
         sword->AddComponent<BoxCollisionAttackDetector>();
-    collider->size = {8, 4};
+    collider->size = size;
 }
 
 void Roguelike::WeaponFactory::CreaetSwordsRotating(GameEngine::Scene& scene, CreateWeapon dto, float damage, float critChance, float critMultiplier, Damage::Context type, float speed, WeaponType Wtype, sf::Vector2f size, std::string spritTexture)
@@ -100,8 +110,6 @@ void Roguelike::WeaponFactory::CreaetSwordsRotating(GameEngine::Scene& scene, Cr
             critMultiplier,
             type,
             dto.source);
-
-        
 
         projectileComponent->angle = 90 * i;
         projectileComponent->lifeTime = 10.f;
@@ -182,7 +190,17 @@ void Roguelike::WeaponFactory::FireBallRotating(GameEngine::Scene& scene, Create
     Damage::Context type;
     type.damageType = DamageType::Elementary;
     Roguelike::WeaponFactory::CreaetSwordsRotating(
-        scene, dto, 1000, 0.2, 2, type, 100, WeaponType::SwordsRotating,
-        {8, 4},
+        scene, dto, 75, 0.2, 2, type, 100, WeaponType::SwordsRotating,
+        {8, 8},
+        "./Resources/Textures/fireball.png");
+}
+
+void Roguelike::WeaponFactory::FireBallFast(GameEngine::Scene& scene, CreateWeapon dto)
+{
+    Damage::Context type;
+    type.damageType = DamageType::Elementary;
+    Roguelike::WeaponFactory::CreaetSword(
+        scene, dto, 40, 0.6, 2, type, 150, WeaponType::FireBallFast,
+        {8, 8},
         "./Resources/Textures/fireball.png");
 }

@@ -47,3 +47,10 @@ void Roguelike::SwordProjectile::RemoveSwordProjectile(GameEngine::GameObject* o
         }
     }
 }
+
+void Roguelike::SwordProjectile::AddRotatingProjectile(GameEngine::GameObject* owner, WeaponType type)
+{
+    auto attackComponent = owner->AddComponent<AttackComponent>();
+    attackComponent->cooldown = WeaponFactory::culDown.find(type)->second;
+    attackComponent->type = type;
+}

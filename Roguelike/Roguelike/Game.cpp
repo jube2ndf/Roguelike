@@ -11,6 +11,7 @@
 #include "EventDieBoss.h"
 #include "WeaponFactory.h"
 #include "CreateWeapon.h"
+#include "Dragon.h"
 
 Roguelike::Game::Game(Engine &engine) {
   this->_engine = &engine;
@@ -71,7 +72,10 @@ void Roguelike::Game::switchLVLs(const SwitchScene& a)
                 ->SetWorldPosition(pos);
         }
         Enemy::Create(*scene, maze.FindFreeCellEnemy());
-
+        if (std::rand() % 2 == 0)
+        {
+            Dragon::Create(*scene, maze.FindFreeCellEnemy());
+        }
         Door::Create(*scene, "next", maze.FindFreeCellDoor(), {32.f, 32.f});
 
     }

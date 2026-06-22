@@ -186,6 +186,7 @@
     <ClInclude Include="Damage.h" />
     <ClInclude Include="DoorLVL.h" />
     <ClInclude Include="DoorTrigget.h" />
+    <ClInclude Include="Dragon.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAI.h" />
     <ClInclude Include="EntityVision.h" />

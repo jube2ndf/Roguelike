@@ -7,5 +7,7 @@ enum class WeaponType
     SlowSwordProjectile,
     FastSwordProjectile,
     SwordsRotating,
+    FireBallRotating,
+    FireBallFast,
 };
 } // namespace Roguelike

@@ -39,5 +39,6 @@ class WeaponFactory
     static void FastSword(GameEngine::Scene& scene, CreateWeapon data);
     static void SwordsRotating(GameEngine::Scene& scene, CreateWeapon dto);
     static void FireBallRotating(GameEngine::Scene& scene, CreateWeapon dto);
+    static void FireBallFast(GameEngine::Scene& scene, CreateWeapon data);
 };
 } // namespace Roguelike
