@@ -1,6 +1,7 @@
 #pragma once
 #include <Component.h>
 #include <GameObject.h>
+#include "StatsComponent.h"
 
 namespace Roguelike {
     class ArmorComponent :
@@ -10,12 +11,10 @@ namespace Roguelike {
         ArmorComponent(GameEngine::GameObject* owner)
             : Component(owner)
         {}
-        float baseArmor = 0.f;
-        float bonusArmor = 0.f;
 
         float GetArmor() const
         {
-            return baseArmor + bonusArmor;
+            return this->_owner->GetComponent<StatsComponent>()->GetStat(StatType::Armor);
         }
     };
 }

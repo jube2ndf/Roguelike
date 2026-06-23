@@ -11,7 +11,6 @@ namespace Roguelike {
 		EnemyAI(GameEngine::GameObject* owner) :
 			SimpleAttack(owner) {
 		}
-		float speed = 120.f;
 
 		void Update(float dt) override;
 	private:

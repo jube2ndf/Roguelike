@@ -18,6 +18,7 @@ namespace Roguelike {
 		sf::Vector2f FindFreeCellPlayer();
 		sf::Vector2f FindFreeCellEnemy();
         sf::Vector2f FindFreeCellDoor();
+        sf::Vector2f FindFreeCellPotion();
 
 		MazeCell& At(int x, int y);
 

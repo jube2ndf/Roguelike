@@ -7,6 +7,7 @@
 #include "EntityVision.h"
 #include <unordered_set>
 #include "Math.h"
+#include "StatsComponent.h"
 
 
 void Roguelike::EnemyAI::Update(float dt)
@@ -106,7 +107,8 @@ void Roguelike::EnemyAI::Update(float dt)
         moveDir = side;
     }
 
-    rb->velocity = moveDir * speed;
+    rb->velocity = moveDir * this->_owner->GetComponent<StatsComponent>()->GetStat(StatType::MoveSpeed);
+    ;
 
     if (attack->CanAttack())
     {

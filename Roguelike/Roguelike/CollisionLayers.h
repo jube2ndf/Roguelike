@@ -10,5 +10,6 @@ namespace CollisionLayers
     constexpr unsigned __int32 Door         = 1 << 5;
     constexpr unsigned __int32 Projectile   = 1 << 6;
     constexpr unsigned __int32 Destructible = 1 << 7;
-    constexpr unsigned __int32 DamageTaken = 1 << 8;
+    constexpr unsigned __int32 DamageTaken  = 1 << 8;
+    constexpr unsigned __int32 GameItem     = 1 << 9;
 }

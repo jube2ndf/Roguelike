@@ -33,6 +33,12 @@ namespace Roguelike {
 
             rb->mass = 5.f;
 
+            enemy->AddComponent<StatsComponent>(
+                std::unordered_map<StatType, float>{
+                    {StatType::MaxHealth, 100.f},
+                    {StatType::MoveSpeed, 90.f},
+                    {StatType::Armor, 10.f}});
+
             auto collider =
                 enemy->AddComponent<GameEngine::BoxCollider>();
             collider->layer = CollisionLayers::EnemyBody |
@@ -59,11 +65,10 @@ namespace Roguelike {
             enemy->AddComponent<EnemyAI>();
 
             SwordProjectile::AddSwordProjectile(enemy, WeaponType::SlowSwordProjectile);
-
-            enemy->AddComponent<HealthComponent>(100.f);
+            
+            enemy->AddComponent<HealthComponent>();
 
             auto armor = enemy->AddComponent<ArmorComponent>();
-            armor->baseArmor = 10;
 
             return enemy;
         }

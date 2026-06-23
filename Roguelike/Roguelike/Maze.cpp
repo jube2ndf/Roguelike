@@ -144,6 +144,20 @@ sf::Vector2f Roguelike::Maze::FindFreeCellDoor()
     }
 }
 
+sf::Vector2f Roguelike::Maze::FindFreeCellPotion()
+{
+    for (int i = 0; i < this->_height * this->_width; i++)
+    {
+        int x = rand() % this->_width;
+        int y = rand() % this->_height;
+
+        if (this->_map[y * this->_width + x] == MazeCell::empty)
+        {
+            return {x * 32.f, y * 32.f};
+        }
+    }
+}
+
 Roguelike::Maze::MazeCell &Roguelike::Maze::At(int x, int y) {
   return this->_map[y * this->_width + x];
 }

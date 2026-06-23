@@ -17,6 +17,8 @@
 #include "CollisionLayers.h"
 #include "SimpleAttack.h"
 #include "SwordProjectile.h"
+#include "Inventory.h"
+#include "InventoryUsedComponent.h"
 
 namespace Roguelike {
 	class Player
@@ -27,8 +29,6 @@ namespace Roguelike {
             auto player = scene.CreateObject();
             LOG_INFO("Game", "Player create: " + std::to_string(reinterpret_cast<uintptr_t>(player)));
             player->persistentObjects = true;
-
-            player->AddComponent<PlayerMovementComponent>();
 
             auto t = player->GetComponent<GameEngine::TransformComponent>();
             t->SetWorldPosition(pos);
@@ -48,21 +48,32 @@ namespace Roguelike {
                 CollisionLayers::Vision |
                 CollisionLayers::Attack |
                 CollisionLayers::Door |
-                CollisionLayers::Projectile;
+                CollisionLayers::Projectile |
+                CollisionLayers::GameItem;
+
             auto rend = player->AddComponent<GameEngine::SpriteRenderer>(GameEngine::TextureManager::load("./Resources/Textures/Player.png"));
             rend->sortingLayer = 10;
             collider->size = { 8,8 };
 
             player->AddComponent<GameEngine::TagComponent>("Player");
 
-            player->AddComponent<HealthComponent>(100.f);
+            player->AddComponent<StatsComponent>(
+                std::unordered_map<StatType, float>{
+                    {StatType::MaxHealth, 100.f},
+                    {StatType::MoveSpeed, 120.f},
+                    {StatType::Armor, 10.f}});
+
+            player->AddComponent<PlayerMovementComponent>();
+            player->AddComponent<HealthComponent>();
 
             auto armor = player->AddComponent<ArmorComponent>();
-            armor->baseArmor = 10;
             
             player->AddComponent<SimpleAttack>();
 
             SwordProjectile::AddSwordProjectile(player, WeaponType::FastSwordProjectile);
+
+            player->AddComponent<InventoryComponent>();
+            player->AddComponent<InventoryUsedComponent>();
 
             scene.GetCamera().Follow(player);
             return player;

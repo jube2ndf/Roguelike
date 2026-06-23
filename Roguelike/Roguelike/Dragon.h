@@ -46,6 +46,12 @@ class Dragon
             CollisionLayers::Attack |
             CollisionLayers::Projectile;
 
+        enemy->AddComponent<StatsComponent>(
+            std::unordered_map<StatType, float>{
+                {StatType::MaxHealth, 1000.f},
+                {StatType::MoveSpeed, 70.f},
+                {StatType::Armor, 50.f}});
+
         auto enemyAI =
             enemy->AddComponent<EntityVision>();
         enemyAI->layer = CollisionLayers::Vision;
@@ -60,15 +66,13 @@ class Dragon
         enemy->AddComponent<GameEngine::TagComponent>("Boss");
 
         auto ai = enemy->AddComponent<EnemyAI>();
-        ai->speed = 50;
 
         SwordProjectile::AddRotatingProjectile(enemy, WeaponType::FireBallRotating);
         SwordProjectile::AddSwordProjectile(enemy, WeaponType::FireBallFast);
 
-        enemy->AddComponent<HealthComponent>(1000.f);
+        enemy->AddComponent<HealthComponent>();
 
         auto armor = enemy->AddComponent<ArmorComponent>();
-        armor->baseArmor = 50;
 
         return enemy;
     }

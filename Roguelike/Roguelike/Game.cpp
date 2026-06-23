@@ -12,6 +12,7 @@
 #include "WeaponFactory.h"
 #include "CreateWeapon.h"
 #include "Dragon.h"
+#include "Potion.h"
 
 Roguelike::Game::Game(Engine &engine) {
   this->_engine = &engine;
@@ -90,5 +91,8 @@ void Roguelike::Game::CreateLevel1()
   
   Player::Create(scene, maze.FindFreeCellPlayer());
   Enemy::Create(scene, maze.FindFreeCellEnemy());
+  Potion::CreateHeatlPotion(scene, maze.FindFreeCellPotion());
+  Potion::CreateHeatlPotion(scene, maze.FindFreeCellPotion());
+  Potion::CreateHeatlPotion(scene, maze.FindFreeCellPotion());
   auto door = Door::Create(scene, "next", maze.FindFreeCellDoor(), {32.f, 32.f});
 }

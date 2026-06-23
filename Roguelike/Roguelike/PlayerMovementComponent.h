@@ -9,7 +9,5 @@ namespace Roguelike {
         PlayerMovementComponent(GameEngine::GameObject* owner):
             GameEngine::Component(owner){}
         void Update(float dt) override;
-
-        float speed = 200.f;
     };
 }

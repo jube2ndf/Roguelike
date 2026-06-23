@@ -2,19 +2,22 @@
 #include <Component.h>
 #include <GameObject.h>
 #include <algorithm>
+#include "StatsComponent.h"
 
 namespace Roguelike {
 	class HealthComponent:
 		public GameEngine::Component
 	{
 	public:
-		HealthComponent(GameEngine::GameObject* owner, float baseHealth)
-			:GameEngine::Component(owner),
-			baseMaxHealth(baseHealth),
-			bonusMaxHealth(0),
-			currentHealth(baseHealth)
+		HealthComponent(GameEngine::GameObject* owner)
+			:GameEngine::Component(owner)
 		{
+            currentHealth = this->_owner->GetComponent<StatsComponent>()->GetStat(StatType::MaxHealth);
+		}
 
+		void Update(float dt) override {
+            if (currentHealth > GetMaxHealth())
+				currentHealth = GetMaxHealth();
 		}
 
 		void TakeDamage(float damage)
@@ -29,7 +32,7 @@ namespace Roguelike {
 
 		float GetMaxHealth() const
 		{
-			return baseMaxHealth + bonusMaxHealth;
+			return this->_owner->GetComponent<StatsComponent>()->GetStat(StatType::MaxHealth);
 		}
 
 		bool IsAlive() const
@@ -43,15 +46,7 @@ namespace Roguelike {
 				std::min(currentHealth + amount,
 					GetMaxHealth());
 		}
-
-		void TakeBonus(float bonus)
-		{
-			bonusMaxHealth += bonus;
-		}
-
 	protected:
-		float baseMaxHealth;
-		float bonusMaxHealth;
 		float currentHealth;
 	};
 }

@@ -37,6 +37,18 @@
     <Filter Include="Файлы заголовков\Enemy\Boss">
       <UniqueIdentifier>{4bf9d72f-68c1-426d-9861-0d2ef2aef923}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Inventory">
+      <UniqueIdentifier>{ffc2df14-235e-404d-8a3a-9d7190755487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Items">
+      <UniqueIdentifier>{de11722b-1ea0-4d87-b7c1-5a1862d97e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Items\Effects">
+      <UniqueIdentifier>{b28c9be7-5d6f-472a-aa27-3335f2c3825c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Items\Item">
+      <UniqueIdentifier>{d1c1b415-5f53-4128-b773-97ea0af54777}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -100,6 +112,24 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="RotatingProjectileComponent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="StatsComponent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="SpeedBuff.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthPotion.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryItemObject.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryUsedComponent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -202,6 +232,42 @@
     </ClInclude>
     <ClInclude Include="Dragon.h">
       <Filter>Файлы заголовков\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="IItem.h">
+      <Filter>Файлы заголовков\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="StatsComponent.h">
+      <Filter>Файлы заголовков\LivingEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="StatModifier.h">
+      <Filter>Файлы заголовков\LivingEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="StatType.h">
+      <Filter>Файлы заголовков\LivingEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="StatSource.h">
+      <Filter>Файлы заголовков\LivingEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="IEffect.h">
+      <Filter>Файлы заголовков\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeedBuff.h">
+      <Filter>Файлы заголовков\Items\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Файлы заголовков\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthPotion.h">
+      <Filter>Файлы заголовков\Items\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Potion.h">
+      <Filter>Файлы заголовков\Items\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryItemObject.h">
+      <Filter>Файлы заголовков\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryUsedComponent.h">
+      <Filter>Файлы заголовков\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
