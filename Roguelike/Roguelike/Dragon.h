@@ -48,7 +48,7 @@ class Dragon
 
         enemy->AddComponent<StatsComponent>(
             std::unordered_map<StatType, float>{
-                {StatType::MaxHealth, 1000.f},
+                {StatType::MaxHealth, 20.f},
                 {StatType::MoveSpeed, 70.f},
                 {StatType::Armor, 50.f}});
 

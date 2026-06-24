@@ -198,6 +198,7 @@
     <ClInclude Include="EntityVision.h" />
     <ClInclude Include="EnemyMovementComponent.h" />
     <ClInclude Include="EventDieBoss.h" />
+    <ClInclude Include="EventPlayerDie.h" />
     <ClInclude Include="HealthPotion.h" />
     <ClInclude Include="IEffect.h" />
     <ClInclude Include="Inventory.h" />

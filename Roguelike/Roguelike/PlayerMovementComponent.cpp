@@ -5,9 +5,18 @@
 #include <TransformComponent.h>
 #include <Rigidbody.h>
 #include "StatsComponent.h"
+#include "EventPlayerDie.h"
+#include <EventBus.h>
 
 void Roguelike::PlayerMovementComponent::Update(float dt)
 {
+    if (!_owner->IsAlive())
+    {
+        EventPlayerDied dto;
+        dto.boss = _owner;
+        GameEngine::EventBus::Emit(dto);
+        return;
+    }
     auto* go = GetGameObject();
     auto* transform = go->GetComponent<GameEngine::TransformComponent>();
 

@@ -25,14 +25,17 @@ void Roguelike::RotatingProjectileComponent::Update(float dt)
 {
     lifeTime -= dt;
 
-    if (lifeTime <= 0.f)
+    if (lifeTime <= 0.f )
     {
         _owner->Destroy();
         return;
     }
 
-    if (!this->source)
+    if (!this->source->IsAlive())
+    {
+        _owner->Destroy();
         return;
+    }
 
     auto centerTransform =
         this->source->GetComponent<GameEngine::TransformComponent>();

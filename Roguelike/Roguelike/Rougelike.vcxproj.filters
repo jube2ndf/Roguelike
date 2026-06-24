@@ -269,5 +269,8 @@
     <ClInclude Include="InventoryUsedComponent.h">
       <Filter>Файлы заголовков\Player</Filter>
     </ClInclude>
+    <ClInclude Include="EventPlayerDie.h">
+      <Filter>Файлы заголовков\Player</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

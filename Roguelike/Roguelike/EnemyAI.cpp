@@ -8,10 +8,25 @@
 #include <unordered_set>
 #include "Math.h"
 #include "StatsComponent.h"
-
+#include <TagComponent.h>
+#include "EventDieBoss.h"
 
 void Roguelike::EnemyAI::Update(float dt)
 {
+    if (!_owner->IsAlive())
+    {
+        for (auto iter : _owner->GetComponents<GameEngine::TagComponent>())
+        {
+            if (iter->GetTag() == "Boss")
+            {
+                BossDiedEvent dto;
+                dto.boss = _owner;
+                GameEngine::EventBus::Emit(dto);
+                return;
+            }
+        }
+    }
+
     auto* Ai = GetGameObject()->GetComponent<EntityVision>();
     auto* rb = GetGameObject()->GetComponent<GameEngine::Rigidbody>();
 

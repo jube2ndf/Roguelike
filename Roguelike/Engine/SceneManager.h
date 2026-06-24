@@ -13,6 +13,7 @@ namespace GameEngine
 
         Scene& CreateScene(const std::string& name);
         void SwitchScene(const std::string& name);
+        void Clear();
 
         Scene* GetActiveScene();
 

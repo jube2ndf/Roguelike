@@ -25,6 +25,11 @@ void GameEngine::SceneManager::SwitchScene(const std::string& name)
     _activeScene = it->second.get();
 }
 
+void GameEngine::SceneManager::Clear()
+{
+    this->_scenes.clear();
+}
+
 GameEngine::Scene* GameEngine::SceneManager::GetActiveScene()
 {
     return _activeScene;

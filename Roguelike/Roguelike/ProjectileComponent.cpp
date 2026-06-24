@@ -36,7 +36,7 @@ void Roguelike::ProjectileComponent::Update(float dt)
 {
     lifeTime -= dt;
 
-    if (lifeTime <= 0.f)
+    if (lifeTime <= 0.f || !this->source)
         this->_owner->Destroy();
 }
 

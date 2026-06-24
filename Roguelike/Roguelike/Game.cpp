@@ -13,6 +13,7 @@
 #include "CreateWeapon.h"
 #include "Dragon.h"
 #include "Potion.h"
+#include "EventPlayerDie.h"
 
 Roguelike::Game::Game(Engine &engine) {
   this->_engine = &engine;
@@ -34,10 +35,17 @@ void Roguelike::Game::Initialize() {
         LOG_INFO("Scene", "Edit current scene");
         this->switchLVLs(a);
     });
+    GameEngine::EventBus::Subscribe<EventPlayerDied>([this](const EventPlayerDied& a) {
+        LOG_INFO("Game", "You die(");
+        this->_engine->GetSceneManager().Clear();
+        this->CreateLevel1();
+        this->_engine->GetSceneManager().SwitchScene("Level1");
+
+    });
   GameEngine::EventBus::Subscribe<BossDiedEvent>([this](const BossDiedEvent& a) {
       LOG_INFO("Game", "Boss die");
         auto scene = this->_engine->GetSceneManager().GetActiveScene();
-        if (scene->FindWithTags("Boss").size() && scene->FindWithTags("Door").size())
+        if (scene->FindWithTags("Boss").size() - 1 > 0)
         {
             for (auto iterDoor : scene->FindWithTags("Door"))
             {
@@ -53,6 +61,8 @@ void Roguelike::Game::Initialize() {
   this->CreateLevel1();
   this->_engine->GetSceneManager().SwitchScene("Level1");
 }
+
+
 
 void Roguelike::Game::switchLVLs(const SwitchScene& a)
 {
@@ -73,14 +83,11 @@ void Roguelike::Game::switchLVLs(const SwitchScene& a)
                 ->SetWorldPosition(pos);
         }
         Enemy::Create(*scene, maze.FindFreeCellEnemy());
-        if (std::rand() % 2 == 0)
-        {
-            Dragon::Create(*scene, maze.FindFreeCellEnemy());
-        }
+        Dragon::Create(*scene, maze.FindFreeCellEnemy());
         Door::Create(*scene, "next", maze.FindFreeCellDoor(), {32.f, 32.f});
-
     }
 }
+
 
 void Roguelike::Game::CreateLevel1()
 {
