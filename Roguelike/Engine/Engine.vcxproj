@@ -132,8 +132,7 @@
     </Link>
     <PostBuildEvent>
       <Message>xcopy /Y /I "$(TargetPath)" "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\" &amp; xcopy /Y /I "$(SolutionDir)SFML-3.1.0\bin\*.dll" "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\"</Message>
-      <Command>
-      </Command>
+      <Command>xcopy /Y /I "$(TargetPath)" "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\" &amp; xcopy /Y /I "$(SolutionDir)SFML-3.1.0\bin\*.dll" "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,16 +146,24 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)SFML-3.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-network.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SFML-3.1.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Message>xcopy /y /d "$(TargetPath)" "$(SolutionDir)Roguelike\$(Platform)\$(Configuration)\"</Message>
+      <Message>
+      </Message>
+      <Command>xcopy /Y /I "$(TargetPath)" "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\" &amp; xcopy /Y /I "$(SolutionDir)SFML-3.1.0\bin\*.dll" "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
