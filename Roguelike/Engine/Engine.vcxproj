@@ -131,7 +131,8 @@
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-system-d.lib;sfml-network-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Message>xcopy /Y /I "$(TargetPath)" "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\" &amp; xcopy /Y /I "$(SolutionDir)SFML-3.1.0\bin\*.dll" "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\"</Message>
+      <Message>
+      </Message>
       <Command>xcopy /Y /I "$(TargetPath)" "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\" &amp; xcopy /Y /I "$(SolutionDir)SFML-3.1.0\bin\*.dll" "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

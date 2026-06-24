@@ -76,6 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <OutDir>$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -150,7 +151,7 @@
       <Command>xcopy /Y /D /I "$(SolutionDir)SFML-3.1.0\bin\*.dll" "$(OutDir)"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy /Y /I "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\"</Command>
+      <Command>xcopy /Y /I "$(SolutionDir)bin\Game\$(Platform)\$(Configuration)\" &amp; xcopy /E /I /Y "$(ProjectDir)Resources" "$(OutDir)Resources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
